@@ -8,15 +8,17 @@ CREATE TABLE users (
     password VARCHAR NOT NULL,
     date_of_registration TIMESTAMP WITHOUT TIME ZONE
 );
--- -- altering existing tables
--- ALTER TABLE ONLY question
---     ADD user_id INTEGER;
 
--- ALTER TABLE ONLY answer
---     ADD user_id INTEGER;
+-- altering existing tables
+ALTER TABLE ONLY question
+    ADD user_id INTEGER;
 
--- ALTER TABLE ONLY comment
---     ADD user_id INTEGER;
+ALTER TABLE ONLY answer
+    ADD user_id INTEGER;
+
+ALTER TABLE ONLY comment
+    ADD user_id INTEGER;
+
 
 --addin constraints for primary key in users table and foreign key in all the other tables that have 'user_id'
 ALTER TABLE ONLY users

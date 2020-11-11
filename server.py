@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template, redirect, url_for, send_from_directory, escape, session, make_response
+from flask import Flask, request, render_template, redirect, url_for, send_from_directory, session
+
 import data_manager
 import connection
 import os
@@ -44,6 +45,14 @@ def registration_page():
         return redirect("/")
     return render_template('registration.html')
 
+@app.route("/users")
+def users_page():
+    return render_template('users.html')
+
+@app.route("/tags")
+def tags_page():
+    return render_template('tags.html')
+
 
 @app.route('/list')
 def listing():
@@ -71,6 +80,10 @@ def question(question_id):
     question_tags =data_manager.get_tags_for_question_id(question_id)
     question_comments = data_manager.update_dict_with_utctime_str(question_comments)
 
+    for this_question_comment in question_comments:
+        current_user = data_manager.get_username_from_user_id(this_question_comment['user_id'])
+        this_question_comment.update({'username': current_user})
+
     answers = data_manager.magic_answer_get(int(question_id))
     if len(answers) > 0:
 
@@ -78,7 +91,15 @@ def question(question_id):
             curr_comments = data_manager.get_comments_from_answer_id(
                 answer['id'])
             curr_comments = data_manager.update_dict_with_utctime_str(curr_comments)
+
+            for this_answer_comment in curr_comments:
+                current_user = data_manager.get_username_from_user_id(this_answer_comment['user_id'])
+                this_answer_comment.update({'username': current_user})
+
+            current_user = data_manager.get_username_from_answer_id(answer['id'])
             answer.update({"comment_list": curr_comments})
+            answer.update({"username": current_user})
+
 
     question = data_manager.get_from_table_by_id(int(question_id), 'question')
 
@@ -90,6 +111,10 @@ def question(question_id):
         view_nr = 0
     view_nr += 1
     question['view_number'] = str(view_nr)
+
+    question_user = data_manager.get_username_from_question_id(question_id)
+    question['username'] = question_user
+
     # for sorting by votes  :D python style, in case sql doesn't work
     #answers = sorted(answers, key=lambda row:int(row['vote_number']), reverse= False)
 
@@ -133,6 +158,12 @@ def update_with_new_question():
     if have_to_write_image:
         # HTML can not find the file if we don't get rid of the '.' at the start of the path
         question_dict.update({'image': my_path_name[1:]})
+    
+    #testing---------------------
+    session = {'user_id': 3}
+    question_dict.update({'user_id': session['user_id']})
+    #----------------------------
+
     data_manager.append_new_row_in_table(question_dict, 'question')
     return redirect("/question/"+str(question_dict["id"]))
 
@@ -181,7 +212,9 @@ def answer(question_id):
         posted_data = request.form
         answer_dict = data_manager.fill_missing_fields_answer(posted_data)
         answer_dict.update({'question_id': question_id})
-
+        #for testing purposes
+        session = {'user_id' : 2}
+        answer_dict.update({'user_id': session['user_id']}) 
         # checking that there is a file
         if have_to_write_image:
             # my_path_name= os.path.join(my_path_name, '_'+str(answer_dict['id'])
@@ -302,6 +335,10 @@ def new_comment_question(question_id):
         comment_dict = data_manager.fill_missing_fields_from_table(
             posted_data, 'comment')
         comment_dict.update({'question_id': question_id})
+        #---test-------
+        session = {'user_id' : 4}
+        comment_dict.update({'user_id': session['user_id']})
+        #-----------
         data_manager.append_new_row_in_table(comment_dict, 'comment')
         return redirect('/question/' + question_id)
 
@@ -315,6 +352,10 @@ def new_comment_answer(answer_id):
         comment_dict = data_manager.fill_missing_fields_from_table(
             posted_data, 'comment')
         comment_dict.update({'answer_id': answer_id})
+        #---test-------
+        session = {'user_id' : 4}
+        comment_dict.update({'user_id': session['user_id']})
+        #-----------
         data_manager.append_new_row_in_table(comment_dict, 'comment')
         return redirect('/question/' + question_id_as_str)
 
