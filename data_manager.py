@@ -84,6 +84,22 @@ def fill_missing_fields_answer(partial_dict, file_path=None):
                 answer_dict.update({field:0})
     return answer_dict
 
+def filling_missing_fields_user(partial_dict,):
+    user_dict = {}
+    for field in connection.column_names_dict['users']:
+        if field in partial_dict:
+            user_dict.update({field:partial_dict[field]})
+        else:
+            if field == "id":
+                new_id = connection.get_max_serial_from_table('users') + 1
+                user_dict.update({'id':new_id})
+            elif field == 'date_of_registration':
+                current_time = datetime.datetime.utcnow()
+                user_dict.update({"date_of_registration": current_time})
+        if field == 'password':
+            hased_pw = util.hash_pw(partial_dict['password'])
+            user_dict.update({'password':hased_pw})
+    append_new_row_in_table(user_dict, 'users')
 
 def fill_missing_fields_from_table(partial_dict,table_name, file_path=None):
     used_dict = {}
@@ -102,6 +118,7 @@ def fill_missing_fields_from_table(partial_dict,table_name, file_path=None):
             else:
                 used_dict.update({field:0})
     return used_dict
+
 
 
 def update_dict_with_utctime_str(my_dict: dict):

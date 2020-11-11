@@ -22,7 +22,7 @@ def get_column_names_from_table(cursor: RealDictCursor, table_name):
 
 # This dictionary is used by data_manager
 column_names_dict={}
-for table_name in ['question', 'answer', 'comment', 'tag', 'question_tag']:
+for table_name in ['question', 'answer', 'comment', 'tag', 'question_tag', 'users']:
     column_names_dict.update({ table_name : get_column_names_from_table(table_name) })
 
 

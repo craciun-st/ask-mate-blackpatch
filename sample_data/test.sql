@@ -1,1 +1,1 @@
-SELECT submission_time FROM question;
+select * from users
