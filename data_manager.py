@@ -54,6 +54,11 @@ def fill_missing_fields_question(partial_dict, file_path=None):
             if field == "id":
                 new_id = connection.get_max_serial_from_table('question') + 1
                 question_dict.update({'id': new_id})
+            # -----------user_id--------------------------------
+            elif field == "user_id":
+                new_user_id = None
+                question_dict.update({'user_id': new_user_id})
+            # --------------------------------------------
             elif field == "submission_time":
                 curr_time = datetime.datetime.utcnow()                
                 question_dict.update({"submission_time": curr_time})
@@ -74,6 +79,11 @@ def fill_missing_fields_answer(partial_dict, file_path=None):
             if field == "id":
                 new_id = connection.get_max_serial_from_table('answer') + 1
                 answer_dict.update({'id': new_id})
+                # -----------user_id--------------------------------
+            elif field == "user_id":
+                new_user_id = None
+                answer_dict.update({'user_id': new_user_id})
+                # --------------------------------------------
             elif field == 'submission_time':
                 current_time = datetime.datetime.utcnow()                
                 answer_dict.update({'submission_time' : current_time})
