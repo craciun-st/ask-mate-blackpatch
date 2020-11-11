@@ -37,6 +37,14 @@ def login_page():
 def registration_page():
     return render_template('registration.html')
 
+@app.route("/users")
+def users_page():
+    return render_template('users.html')
+
+@app.route("/tags")
+def tags_page():
+    return render_template('tags.html')
+
 
 @app.route('/list')
 def listing():
