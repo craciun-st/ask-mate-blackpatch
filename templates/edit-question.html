@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.discordapp.com/attachments/730458730331897949/775703314762563653/favicon-310.png">
+    <title>Edit Question</title>
+</head>
+<body>
+    <h1>ASK — MATE</h1>
+    <br>
+    <br>
+    <form id="edit-question-form" method="post">        
+        <label id="edit-question-title" for="question-title" >Title</label>
+        <br>
+        <input id="edit-question-title-cell" type="text" name="title" value="{{ input_question['title'] }}" placeholder="Question Title">
+        <br>
+        <br>
+        <label id="edit-question-message" for="question-message" >Question</label>
+        <br>
+        <textarea id="edit-question-message-cell" name="message" rows="10" cols="100" placeholder="Detailed Question">{{ input_question["message"] }}</textarea>
+
+        <br>
+        <br>
+        <!-- Allow the user to submit the form. -->
+        <button type="submit" id= "submit-edited-question-button">
+        Submit question!</button>
+    </form>
+
+    <br>
+    <br>
+    
+    <form action="/list">
+        <button id="back-to-question-from-edit-button">
+            ◀  Back to questions</button>
+    </form>
+</body>
+</html>

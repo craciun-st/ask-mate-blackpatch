@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.discordapp.com/attachments/730458730331897949/775703314762563653/favicon-310.png">
+    <title>Add Question</title>
+</head>
+<body>
+    <h1>ASK  — MATE</h1>
+    <!-- this form will let the user to wirte it's question and send it with a post method -->
+    <br>
+    
+    <form method="post" enctype=multipart/form-data id="form-position"> 
+        <!-- there is an input area for the title         -->       
+        <label for="question-title" id="form-text">Title</label>
+        <br>
+        <input id="title-cell" type="text" name="title" placeholder="Subject">
+        <p></p>
+        <br>
+        <!-- there is a text area for the question -->
+        <label for="question-message-textarea" id="form-text">Question</label>
+        <br>
+        <textarea id="question-message-textarea" name="message" rows="14" cols="100" placeholder="Detailed question"></textarea>
+        <br>
+        <br>
+        <!-- Allow the user to submit the form. -->
+        <button type="submit" id="submit-question-button">Submit question!</button>
+        <input type=file name=file>
+    </form>
+    <br>
+    <!-- <title>Upload new File</title>
+    <h3>Upload new File</h3>
+    <form action= '/image' method=POST enctype=multipart/form-data>
+        <input type=file name=file>
+        <input type=submit value=Upload>
+    </form> -->
+    <br>
+    <br>
+    
+    <form action="/">
+        <button id="button-back-from-add-question">
+            ◀ Back to Main Page</button>
+    </form>
+</body>
+</html>

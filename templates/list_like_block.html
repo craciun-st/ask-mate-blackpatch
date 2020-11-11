@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <h1>{% block header_one_text %}ASK — MATE{% endblock %}</h1>
+
+    {% block upper_buttons %}{% endblock %}
+    
+
+<br>
+
+    <form action="/">
+        <button id="button-back-to-main">◀  Back to Main Page</button>
+    </form>
+    
+    <br>
+    <!-- there is a table here -->
+    {% block table_listing %}
+    {% endblock %}
+    <br>
+    <br>
+    <!-- there is a button for going back to the main page '/' -->
+    <form action="/">
+        <button id="button-back-to-main">◀  Back to Main Page</button>
+    </form>
+    <br>
+    <br>
+</body>
+</html>

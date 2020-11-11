@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.discordapp.com/attachments/730458730331897949/775703314762563653/favicon-310.png">
+    <title>Question</title>
+</head>
+
+<body class="needs-black-background">
+    <div id="second-background"></div>
+    <h1>ASK — MATE</h1>
+    
+    <form action="/list">
+        <button id="back-to-questions-button">◀ Back to questions</button>
+    </form>
+    <br>
+    <br>
+    <!-- displays the question corresponding to the question id -->
+    <!-- <h2 id="h2-questions">Question</h2>  -->
+
+    <table id="question-table">
+        
+        <tr>
+    <td id="question-title">
+        {{question["title"]}}</td>
+      </tr>
+      <tr>
+
+    <td id="question-text">
+        {{question["message"]}}
+
+        
+        <p id="username-submission">Submitted by USERNAME_PLACEHOLDER
+
+        </p>
+
+      
+
+        <!--Answer/Delete/Edit Buttons new placement-->
+      
+
+     
+    </td>
+    
+            
+    </tr>
+
+
+
+    
+<tr>
+    {%if question["image"] %}
+    <p style="text-align: center;">
+    <img src="{{question['image']}}" alt="photo description" style="text-align: center; border-radius: 8px; width:67%">
+    </p>
+
+    {%endif%}
+    </tr>
+
+        <br>
+</table>
+<table>
+      
+            <tr>
+                <td>
+        <form action='/question/{{input_id}}/new-answer' method="GET">
+            <button id="answer-question-button"><span title="Answer this Question">
+                <img src="https://cdn.discordapp.com/attachments/730458730331897949/775823491571253258/PinClipart.com_speech-clip-art_802562_-_Copy_2.png"></span></button>
+        </form>
+        </td> 
+        
+        <td>
+        <form action='/question/{{input_id}}/edit' method="GET">
+            <button id="edit-question-button"><span title="Edit Question"><img src="https://cdn.discordapp.com/attachments/730458730331897949/775825144143806484/SPOILER_edit_-_Copy.png"></span></button>
+        </form>
+        </td>
+        
+        <td>
+        <form action='/question/{{input_id}}/delete' method="GET"> 
+            <button id="delete-question-button"><span title="Delete Question"><img src="https://cdn.discordapp.com/attachments/730458730331897949/775826329807355934/deleteremovetrashtrashbintrashcanicon-1320073117929397588_48.png"></span></button>
+        </form>
+        </td>
+        </tr>
+
+</table>
+        <!-- tag cell -->
+
+
+        <table id = "tags">
+          
+            <tr>
+                <td id="table-for-buttons">
+                    <form action='/question/{{input_id}}/new-tag' method="POST">
+                    <button id="add-tag-button"><span title="Add Tag"><img src="https://cdn.discordapp.com/attachments/730458730331897949/775806067266420746/imageedit_3_5137188590.png"></span></button>
+                    <!-- <input id="tag-cell" type="text" name="tagname" placeholder="Add a tag"> -->
+                    <input id="tag-cell" type="text" list="tag-list" name="tagname" placeholder="Add a tag" autocomplete="off">
+
+                    </form>
+                </td>   
+                        
+         {% if question_tags %}
+        {% for tag in question_tags %}                 
+            <td> {{tag['name']}}
+            <td>
+                <form action='/question/{{input_id}}/tag/{{tag["id"]}}/delete' method="GET">
+                    <button id="delete-tag-button-red"><span title="Delete">✕</span></button>
+                </form>
+            </td></td>
+        {%endfor%}
+        {%endif%}                    
+            </tr>
+          
+        </table>
+
+
+        <br>
+        <!-- comment cell -->
+     
+                    {%if comments_for_question%}
+        {%for comment in comments_for_question%}          
+        <table id="comment-text">   
+
+            <tr>
+    
+                <td id="comment-body"><p>{{comment["message"]}} {%if comment['edited_count'] != 0%} Edited {{comment['edited_count']}} times {%endif%} 
+                     <p id="comment-datetime"> Submitted by USERNAME_PLACEHOLDER at {{comment['utctime_str']}}</p></p>
+            <hr id="breakline-between-comments">    </td>
+                
+                
+                <td id="td_tag_button">
+                    <form action='/comment/{{comment["id"]}}/edit' method="GET">
+                        <button id="edit-tag-button"><span title="Edit"><img src="https://cdn.discordapp.com/attachments/730458730331897949/775839780411146300/pngfind.com-delete-icon-png-2022234_-_Copy.png"></span></button>
+                    </form>
+                </td>  
+
+                <td id="td_tag_button">
+                    <form action='/comment/{{comment["id"]}}/delete' method="GET"> 
+                        <button id="delete-tag-button"><span title="Delete">✕</span></button>
+                    </form>
+                    
+                </td>     
+            </tr>
+
+        </table>
+         {%endfor%}
+        {%endif%} 
+            
+        <!-- comment button -->
+        <table id="table-for-buttons">
+           <td>
+               <form action='/question/{{input_id}}/new-comment' method="POST">
+                   <button id="comment-button"><span title="Add Comment"><img src="https://cdn.discordapp.com/attachments/730458730331897949/775796946270552125/kisspng-computer-icons-logo-message-download-5af446a9ad9aa7.8795940815259583137111_-_Copy_-_Copy.png"></span></button>
+                   <input id="comment-cell" type="text" name="message" placeholder="Add a comment" autocomplete="off">
+               </form>
+           </td>
+   
+           </table>
+
+    
+        <br>
+<!-- INITIAL PLACEMENT FOR ANSWER/DELETE/EDIT BUTTONS-->
+   
+<!-- <table>
+        <tr>
+
+            <td>
+                <form action='/question/{{input_id}}/new-answer' method="GET">
+                    <button id="small-button">Answer this question</button>
+        </form>
+            </td>
+            
+    
+    
+            <td> -->
+        <!-- button for deleting to the question corresponding to the question id  and all the answers to that question-->   
+        <!-- <form action='/question/{{input_id}}/edit' method="GET"  id="button-position">
+            <button id="small-button">Edit Question</button>
+        </form>
+            </td>
+            <td> -->
+        <!-- button for going back to the list of questions  -->
+        <!-- <form action='/question/{{input_id}}/delete' method="GET"> 
+            <button id="small-button">Delete Question</button>
+        </form>
+            </td>
+        </tr>
+    </table> -->
+
+    <!-- INITIAL PLACEMENT UNTIL HERE-->
+
+
+    <!-- <form action='/questio-n/{{input_id}}/edit' method="GET" id="button-position">
+        <button id="small-button">Comment Question</button>
+    </form> -->
+
+
+<!-- <hr id="breakline-answers"> -->
+
+    <!-- displays all the answers corresponding to the question id in a table along with vote buttons and the number of votes -->
+    <h2 id="h2-answers">Answers</h2>
+
+{%if corresponding_answers%}
+{%for row_answer in corresponding_answers%}
+
+
+    <table>
+
+        <tr>
+            <td id="answer-body"><p>▶   {{row_answer["message"]}}</p><p id="username-submission">Submitted by USERNAME_PLACEHOLDER </p></td>
+
+            <td id="answer-vote-background">
+                
+                <form action="/answer/{{row_answer['id']}}/vote_up " >
+                    <button id="upvote-button">▲</button>
+                </form>
+
+
+                <form action="/answer/{{row_answer['id']}}/vote_down">
+                    <button id="downvote-button">▼</button>
+                </form>
+
+                </td>
+
+            <td id="answer-vote-nr">{{row_answer["vote_number"]}}</td>
+  
+
+        </tr>
+
+                <!-- answer comment -->
+                {%if row_answer["comment_list"] %}
+                {%for comment_answer in row_answer["comment_list"]%}
+
+                <table id="comment-text">        
+                    <td><p>{{comment_answer["message"]}} {%if comment_answer['edited_count'] != 0%} Edited {{comment_answer['edited_count']}} times {%endif%} 
+                        <p id="comment-datetime">Submitted by USERNAME_PLACEHOLDER at {{comment_answer['utctime_str']}}</p></p>
+                            <hr id="breakline-between-comments">
+                    <td id="td_tag_button">
+                        <form action='/comment/{{comment_answer["id"]}}/edit' method="GET">
+                            <button id="edit-tag-button"><span title="Edit"><img src="https://cdn.discordapp.com/attachments/730458730331897949/775839780411146300/pngfind.com-delete-icon-png-2022234_-_Copy.png"></span></button>
+                        </form>
+                    <td id="td_tag_button">
+                        <form action='/comment/{{comment_answer["id"]}}/delete' method="GET">
+                            <button id="delete-tag-button"><span title="Delete">✕</span></button>
+                        </form>
+                       
+        
+        
+                    </td> </td> </td> 
+
+                </table>
+                {%endfor%}
+                {%endif%}
+                
+                <table id="table-for-buttons">
+                   <td>
+                       <form action='/answer/{{row_answer["id"]}}/new-comment' method="POST">
+                           <button id="comment-button"><span title="Add Comment"><img src="https://cdn.discordapp.com/attachments/730458730331897949/775796946270552125/kisspng-computer-icons-logo-message-download-5af446a9ad9aa7.8795940815259583137111_-_Copy_-_Copy.png"></span></button>
+                           <input id="comment-cell" type="text" name="message" placeholder="Add a comment" autocomplete="off">
+                       </form> 
+                   </td>
+                  
+           
+                   </table>
+
+                <!-- /answer comment -->
+       
+        
+        {%if row_answer['image'] %}
+        <p style="text-align: center;">
+        <img src="{{row_answer['image']}}" alt="photo description" style="text-align: center; border-radius: 8px; width:67%">
+        </p>
+       {%endif%}
+
+       
+    </table>
+
+
+{%endfor%}
+{%endif%}
+    <br>
+           
+
+    <!-- button for answering to the question corresponding to the question id -->
+    
+    <br>
+
+
+    <br>
+    <br>
+    <form action="/list">
+        <button id="back-to-questions-button">◀ Back to questions</button>
+    </form>
+    <br>
+    <br>
+
+
+</body>
+
+</html>

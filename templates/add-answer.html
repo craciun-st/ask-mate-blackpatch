@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.discordapp.com/attachments/730458730331897949/775703314762563653/favicon-310.png">
+    <title>Add Answer</title>
+</head>
+<body>
+    <h1>ASK — MATE</h1>
+    <!-- Creating a text area where the user can write their answer-->
+    <div id ="add-answer-div">
+        <form method="post" enctype=multipart/form-data >
+            <label id="add-answer-title" for="answer-message" ><p>Message</p></label>
+
+            <textarea id="answer-message" placeholder="Write your answer here" name="message" rows="14" cols="100" ></textarea>
+            <br>     
+            <br>
+            <button id="submit-answer-button" type="submit">Submit answer!</button>
+            <input type=file name=file>
+            <br>
+            <!-- Allow the user to submit the form. -->
+
+
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <form action="/question/{{input_id}}">
+        <button id="back-to-question-button">◀  Back to question</button>
+    </form>
+</body>
+</html>

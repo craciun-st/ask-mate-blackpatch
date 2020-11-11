@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.discordapp.com/attachments/730458730331897949/775703314762563653/favicon-310.png">
+    <title>Sign In</title>
+</head>
+<body>
+
+    <h1>Ask-Mate</h1>
+    <section id="overlay">
+        <form method='POST' id='login-form'> 
+            <h1 id="login-text">Sign In</h1>
+            <hr id="breakline">
+            <label for="username" id="username-pw">Username</label>
+                <br>
+                <input type="text" id="username-pw-cell" name="username" placeholder="username">
+                <br>
+            <label for="pw" id="username-pw">Password</label>
+                <br>
+                <input type="password" id="username-pw-cell" placeholder="password">
+                <br>
+                <input type="submit" value="Sign In" id="login-button">
+            <label for="remember" id="remember-me">
+                <input type="checkbox" value="remember">Remember me
+            </label>
+            <button id="forgot"><span title="Just kidding, this doesn't do anything">Forgot password?</span></button>
+            
+        </form>
+    </section>
+</body>
+</html>

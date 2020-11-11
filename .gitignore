@@ -1,0 +1,19 @@
+/venv/
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# pyenv
+.python-version
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Visual Studio files
+.vscode/
+
+sample_data/*.csv
+conn.sh

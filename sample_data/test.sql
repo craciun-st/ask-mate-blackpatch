@@ -1,0 +1,1 @@
+SELECT submission_time FROM question;

@@ -1,0 +1,47 @@
+{% extends "list_like_block.html" %}
+{% block title %}Search results{% endblock %}
+{% block header_one_text %} Search results {% endblock %}
+{% block table_listing %}
+<table>
+    {% for row in db_questions %}            
+    <tr>
+        <td id="td-background"><br><form action="/question/{{row['id']}}">
+
+            <button id="question-link-button">{{row["title"]}}</button></form>
+
+            <p id="viewed">Viewed {{row["view_number"]}} times</p>
+            <p id="datetime">Added at {{row["submission_time"]}}</p>
+
+
+            
+
+            <td id="vote-nr">{{row["vote_number"]}}</td>
+        </td>
+        
+    </tr>
+    {% if row["answer_list"] %}
+    <tr>
+        <table>
+            {% for row_answer in row["answer_list"] %}
+            <tr>
+                <td></td>
+                <td id="answer-body">▶   {{row_answer["message"]}}</td>               
+                <td id="answer-vote-nr">{{row_answer["vote_number"]}}</td>
+      
+    
+            </tr>
+            {% endfor %}
+        </table>
+    </tr>
+    {% endif %}
+  <!-- table  width: 70%; border-radius: 40px; 
+   tr    style="background-color: whitesmoke; opacity: 0.6;"
+   td   border-radius: 8px;
+   td vote_nr font-size: 25px; padding-right: 20px; padding-left: 20px; -->
+
+        
+    {% endfor %}
+
+
+</table>
+{% endblock %}
