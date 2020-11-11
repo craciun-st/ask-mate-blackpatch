@@ -33,7 +33,7 @@
         {{question["message"]}}
 
         
-        <p id="username-submission">Submitted by USERNAME_PLACEHOLDER
+        <p id="username-submission">Submitted by {{question['username']}}
 
         </p>
 
@@ -126,7 +126,7 @@
             <tr>
     
                 <td id="comment-body"><p>{{comment["message"]}} {%if comment['edited_count'] != 0%} Edited {{comment['edited_count']}} times {%endif%} 
-                     <p id="comment-datetime"> Submitted by USERNAME_PLACEHOLDER at {{comment['utctime_str']}}</p></p>
+                     <p id="comment-datetime"> Submitted by {{comment['username']}} at {{comment['utctime_str']}}</p></p>
             <hr id="breakline-between-comments">    </td>
                 
                 
@@ -209,7 +209,7 @@
     <table>
 
         <tr>
-            <td id="answer-body"><p>▶   {{row_answer["message"]}}</p><p id="username-submission">Submitted by USERNAME_PLACEHOLDER </p></td>
+            <td id="answer-body"><p>▶   {{row_answer["message"]}}</p><p id="username-submission">Submitted by {{row_answer["username"]}} </p></td>
 
             <td id="answer-vote-background">
                 
@@ -235,7 +235,7 @@
 
                 <table id="comment-text">        
                     <td><p>{{comment_answer["message"]}} {%if comment_answer['edited_count'] != 0%} Edited {{comment_answer['edited_count']}} times {%endif%} 
-                        <p id="comment-datetime">Submitted by USERNAME_PLACEHOLDER at {{comment_answer['utctime_str']}}</p></p>
+                        <p id="comment-datetime">Submitted by {{comment_answer['username']}} at {{comment_answer['utctime_str']}}</p></p>
                             <hr id="breakline-between-comments">
                     <td id="td_tag_button">
                         <form action='/comment/{{comment_answer["id"]}}/edit' method="GET">

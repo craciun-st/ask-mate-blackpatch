@@ -37,6 +37,65 @@ def get_comments_from_answer_id(answer_id_val):
         reverse=True
     )
 
+def get_username_from_answer_id(answer_id_val):
+    answer_row = connection.get_data_by_value_pair_from_table(
+        {'id': answer_id_val}, 'answer'
+    )[0]
+    user_id_value = answer_row['user_id']
+
+    if user_id_value:
+        user_row = connection.get_data_by_value_pair_from_table(
+            {'id': user_id_value}, 'users'
+        )[0]
+        username = user_row['username']
+        return username
+    else:
+        return "Anonymous"
+
+def get_username_from_question_id(question_id_val):
+    question_row = connection.get_data_by_value_pair_from_table(
+        {'id': question_id_val}, 'question'
+    )[0]
+    user_id_value = question_row['user_id']
+
+    if user_id_value:
+        user_row = connection.get_data_by_value_pair_from_table(
+            {'id': user_id_value}, 'users'
+        )[0]
+        username = user_row['username']
+        return username
+    else:
+        return "Anonymous"
+
+# #----------username for question comment----------
+# def get_username_from_comment_question_id(question_id_val):
+#     comment_row = connection.get_data_by_value_pair_from_table(
+#         {'question_id': id}, 'comment'
+#     )[0]
+#     user_id_value = comment_row['user_id']
+
+#     if user_id_value:
+#         user_row = connection.get_data_by_value_pair_from_table(
+#             {'id': user_id_value}, 'users'
+#         )[0]
+#         username = user_row['username']
+#         return username
+#     else:
+#         return "Anonymous"
+# #--------------------------------------------------
+#----------username for answer comment----------
+def get_username_from_user_id(user_id_value):
+
+    if user_id_value:
+        user_row = connection.get_data_by_value_pair_from_table(
+            {'id': user_id_value}, 'users'
+        )[0]
+        username = user_row['username']
+        return username
+    else:
+        return "Anonymous"
+#--------------------------------------------------
+
 def get_tags_for_question_id(question_id_val):
     return connection.get_sorted_inner_join_between_tables_where_table2_column_has_value_and_order_by_table1_column(
         table1_name='tag',
