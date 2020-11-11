@@ -11,36 +11,21 @@
 <body>
     <h1>ASK  — MATE</h1>
 
-<table>
+<table id='testing_table'>
     <tr>
-        <td>
+        <td id="td-width">
             <form id="login-buttons" action="/registration">
                 <button id="sign-log">Sign Up</button>
             </form>
         </td>
-        <td>
+        <td id="td-width">
                 <form id="login-buttons" action="/users">
-        <button id="sign-log">Users Page</button>
+        <button id="sign-log"><img src="https://cdn.discordapp.com/attachments/730458730331897949/776183888355524608/user-20.png"> Users</button>
     </form>
         </td>
-    </tr>
-        <tr>
-        <td>
-            <form id="login-buttons" action="/login">
-                <button id="sign-log">Log in</button>
-            </form>
-</td>
-<td>
-    <form id="login-buttons" action="/tags">
-        <button id="sign-log">Tag List</button>
-    </form>
-</td>
-</tr>
 
 
-    
-
-
+<td id="td-width">
     <!-- there is a drop-down for our sorting parameters -->
     
     <form method="GET">
@@ -70,10 +55,24 @@
         <!--Sort Button-->
        <!-- <input type="submit" value="Sort" style="padding-right: 15px; margin-left: 1480px; margin-top: 10px; padding: 10px; text-align: center; font-size: 20px; border-radius: 8px; border: none; background-color: lightseagreen; color: ivory; font-family: Verdana, Geneva, Tahoma, sans-serif;"> -->
     </form>
-   
+</td>
+    </tr>
+        <tr>
+        <td id="td-width">
+            <form id="login-buttons" action="/login">
+                <button id="sign-log">Log in</button>
+            </form>
+</td>
+<td id="td-width">
+    <form id="login-buttons" action="/tags">
+        <button id="sign-log"><img src="https://cdn.discordapp.com/attachments/730458730331897949/776182247308656650/18.png">  Tags</button>
+    </form>
+</td>
+
+   <td id="td-width">
 <!-- check this later -->
 
-    <form action=/search method="GET"> 
+    <form action=/search method="GET" id='search'> 
   
         <button id="search-button" type="submit">
             <span title="Search"><img src="https://cdn.discordapp.com/attachments/730458730331897949/775489377173766144/pngfind.com-search-logo-png-6694830.png"></span></button>
@@ -81,6 +80,12 @@
     </form>
 
 <!-- until here -->
+</td>
+</tr>
+
+
+    
+
 
 <br>
 

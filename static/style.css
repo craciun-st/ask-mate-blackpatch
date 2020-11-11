@@ -36,15 +36,15 @@ h1 {
 }
 
 label {
-    margin-left: 1140px; 
+    /* margin-left: 1140px;  */
     font-size: 23px; 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #input-background {
-    width:70px; 
+    width:50px; 
     margin-top: 10px; 
-    padding: 3px; 
+    /* padding: 3px;  */
     text-align: center; 
     font-size: 25px; 
     border-radius: 8px; 
@@ -52,6 +52,8 @@ label {
     background-color: transparent; 
     color: ivory; 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-left: 45px;
+
 }
 
 table {
@@ -143,8 +145,14 @@ table {
 }
 /* ------------ LIST PAGE -----------*/
 
+#testing_table{
+    width:70%;
+}
+#td-width {
+    width: 33%;
+}
 #login-buttons {
-    margin-left: 14%;
+    width: 200px;
 }
 #sign-log {
     font-size: 20px;
@@ -153,31 +161,32 @@ table {
     color: whitesmoke;
     margin-left: 30px;
 }
-
+#search {
+    margin-left: 60px;
+}   
 #search-button {
+
     padding: 5px;
-    padding-right: 40px;
     margin-top: 10px;
-    margin-left: 1165px;
+    margin-right: 30px;
     border-radius: 6px;
     border: none;
     background-color: transparent; 
     width: 10px;
 }
-/* #search-img {
-    background-image: url('https://cdn.discordapp.com/attachments/730458730331897949/775487052590088232/pngfind.com-search-logo-png-6694830.png');
-} */
 
 #search-cell {
+
     background-color: rgb(219, 219, 219);
     font-size: 20px; 
     border-radius: 6px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     width: 300px;
+    border: none;
+    margin-bottom: 15px;
 
 }
-
-#sort-by {
+#sort-by {   
     font-size: 20px; 
     border-radius: 6px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -742,3 +751,74 @@ table {
     font-family: Verdana, Geneva, Tahoma, sans-serif; 
     margin-left: 160px;
 }
+
+/* -------------USERS PAGE----------------- */
+#registered-user-title {
+    color: whitesmoke;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
+    font-size: 30px;
+    padding-bottom: 40px;
+}
+
+.users-table {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
+    padding: 20px;
+    width: 95%;
+    border-collapse: collapse;
+
+
+}
+th {
+    text-align: center;
+    height: 30px;
+    padding-bottom: 20px;
+    font-size: 20px;
+
+}
+#id-th {
+    width: 70px;
+}
+
+#user-table-row:nth-child(even) {
+    background-color: rgba(68, 150, 147, 0.295);
+
+   
+}
+#user-table-row {
+    height: 60px;
+    padding-left: 20px;    
+    text-align: center;
+
+}
+#users-table-background {
+    background-color: whitesmoke;
+    width: 70%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin: auto;
+    opacity: 0.8;
+    border-radius: 26px;
+
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------------TAGS PAGE----------------- */
