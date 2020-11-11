@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for, send_from_directory, session
+
 import data_manager
 import connection
 import os
@@ -6,6 +7,7 @@ import util
 
 
 app = Flask(__name__)
+app.secret_key = 'aperughpearuhg-0934q=-9343=q45w6y954=45qw=hg94'
 
 app.config['UPLOAD_FOLDER'] = "./images"
 ALLOWED_EXTENSIONS = {'png', 'jpeg', 'jpg'}
@@ -29,12 +31,18 @@ def get_uploaded_file(filename):
 def main_page():
     return render_template('index.html')
 
-@app.route("/login")
+@app.route("/login", methods = ['POST','GET'])
 def login_page():
     return render_template('login.html')
 
-@app.route("/registration")
+@app.route("/registration", methods = ['POST','GET'])
 def registration_page():
+    if request.method == 'POST':
+        posted_data = request.form
+        username = request.form['username']
+        pw = request.form['password']
+        data_manager.filling_missing_fields_user(posted_data)
+        return redirect("/")
     return render_template('registration.html')
 
 @app.route("/users")

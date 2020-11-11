@@ -2,6 +2,19 @@
 from flask import Markup
 import data_manager
 import datetime
+import bcrypt
+
+
+
+def hash_pw(password):
+    hashed_bytes = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_bytes.decode('utf-8')
+
+
+def verify_password(password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(password.encode('utf-8'), hashed_bytes_password)
+
 
 def embed_substring_in_CSS_class(substring: str):
     return lambda full_string: Markup(full_string.replace(
@@ -43,6 +56,9 @@ def convert_time_to_str(date_time_obj: datetime.datetime):
         time_str = "..."
 
     return time_str
+
+
+
 
 
 if __name__ == "__main__":
