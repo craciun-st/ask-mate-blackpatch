@@ -409,6 +409,18 @@ def get_colpair_sorted_count_on_inner_join_group_by_table1_column_count_table2(
 
     return result_rows
 
+@connection_handler
+def get_count_of_users_id_from_table(cursor: RealDictCursor, table_name):
+    query=sql.SQL("""
+        select username, COUNT(users.id) from {sql_table_name} inner JOIN users
+        ON {sql_table_name}.user_id = users.id
+        GROUP BY username
+    """).format(sql_table_name= sql.Identifier(table_name))
+    cursor.execute(query)
+    result_rows = cursor.fetchall()
+    return result_rows
+
+
 
 @connection_handler
 def delete_tag_by_question_id(cursor: RealDictCursor,id_val,table_name,tag_id_value):

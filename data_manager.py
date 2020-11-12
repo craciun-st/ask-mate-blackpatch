@@ -129,7 +129,12 @@ def fill_missing_fields_from_table(partial_dict,table_name, file_path=None):
                 used_dict.update({field:0})
     return used_dict
 
-
+def compose_dict_for_user_page(username):
+    compose_dict = {}
+    compose_dict.update({'comments':get_count_of_comments_by_username(username)['count']})
+    compose_dict.update({'answers':get_count_of_answers_by_username(username)['count']})
+    compose_dict.update({'questions':get_count_of_questions_by_username(username)['count']})
+    return compose_dict
 
 def update_dict_with_utctime_str(my_dict: dict):
 
@@ -140,4 +145,5 @@ def update_dict_with_utctime_str(my_dict: dict):
 
     return my_dict
 
-    
+if __name__ == "__main__":
+    print(compose_dict_for_user_page('Admin'))
