@@ -738,7 +738,7 @@ table {
 }
 
 /* -------------USERS PAGE----------------- */
-#registered-user-title {
+#page-title {
     color: whitesmoke;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif; 
@@ -796,56 +796,41 @@ th:last-child {
 
 /* ----------TAG PAGE--------- */
 .c-list-tags{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    row-gap: 20px;
-    justify-items: start;
-    width: max-content;
-    /* column-gap: 20px; */
+    background-color: rgba(245, 245, 245, 0.164);
+    width: 70%;
     margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1%;    
+    row-gap: 8px;
+    border-radius: 18px;
+    padding: 2% 0;
+    justify-content: center;
+    overflow: auto;
 }
 
 .child_tag_name{
-    grid-column: 1;
-    justify-self: end;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color: whitesmoke;
     font-size: 20px;
-    background-color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.486);
     opacity: 0.8; 
-    border-radius: 8px;
-    /* padding-left: 20px; */
-}
+    border-radius: 18px;
+    column-gap: 10px;
 }
 
 .child_tag_nr_uses{
     grid-column: 2;    
     font-size: 20px; 
-    background-color: whitesmoke; 
-    opacity: 0.8; 
+    background-color: rgba(41, 112, 110, 0.918); 
     margin: auto; 
-    border-radius: 8px;  
-    /* padding-left: 20px; */
+    border-radius: 100%; 
+    padding: 2px 8px;
 }
 
 .c-list-tags div{
-    padding: 40px;
+    padding: 1%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* -------------TAGS PAGE----------------- */
