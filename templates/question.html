@@ -66,10 +66,12 @@
       
             <tr>
                 <td>
+        {%if is_logged_in == True%}
         <form action='/question/{{input_id}}/new-answer' method="GET">
             <button id="answer-question-button"><span title="Answer this Question">
                 <img src="https://cdn.discordapp.com/attachments/730458730331897949/775823491571253258/PinClipart.com_speech-clip-art_802562_-_Copy_2.png"></span></button>
         </form>
+        {%endif%}
         </td> 
         
         <td>

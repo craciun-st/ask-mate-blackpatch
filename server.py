@@ -78,6 +78,10 @@ def tags_page():
 
 @app.route('/list')
 def listing():
+    if 'username' in session:
+        is_logged_in = True
+    else:
+        is_logged_in = False
     sort_by = request.args["sort-by"] if 'sort-by' in request.args.keys() else "submission_time"
     sort_order = request.args["sort-order"] if 'sort-order' in request.args.keys() else "true"
     is_descending = (sort_order.lower() in ['true', 't', 'yes'])
@@ -90,13 +94,16 @@ def listing():
     questions = data_manager.update_dict_with_utctime_str(questions)
     
 
-    return render_template('list.html', db_questions=questions)
+    return render_template('list.html', db_questions=questions, is_logged_in = is_logged_in)
 
 
 @app.route('/question/<question_id>')
 # route that displays the question with the specified ID and the answers for that question
 def question(question_id):
-
+    if 'username' in session:
+        is_logged_in = True
+    else:
+        is_logged_in = False
     question_comments = data_manager.get_multiple_rows_for_question_id(
         question_id, 'comment')
     question_tags =data_manager.get_tags_for_question_id(question_id)
@@ -147,7 +154,8 @@ def question(question_id):
                                question=question,
                                corresponding_answers=answers,
                                comments_for_question=question_comments,
-                               question_tags = question_tags
+                               question_tags = question_tags,
+                               is_logged_in = is_logged_in
                                )
     else:
         return "Could not find such a question!", 400
@@ -155,6 +163,12 @@ def question(question_id):
 
 @app.route('/add-question', methods=["GET"])
 def display_new_question():
+    global session
+    if 'username' in session:
+        is_logged_in = True
+    else:
+        is_logged_in = False
+        return render_template('not_authenticated.html'), 401
     return render_template('add-question.html')
 
 
@@ -221,6 +235,12 @@ def vote_down(question_id):
 
 @app.route('/question/<question_id>/new-answer', methods=['POST', 'GET'])
 def answer(question_id):
+    global session
+    if 'username' in session:
+        is_logged_in = True
+    else:
+        is_logged_in = False
+        return render_template('not_authenticated.html'), 401
     # route for the answer page, adds an answer to a question with a specified ID when called with POST method, calling this route with GET methon will render our add-answer template
     if request.method == 'POST':
         have_to_write_image = False
