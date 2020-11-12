@@ -141,79 +141,98 @@ table {
 }
 /* ------------ LIST PAGE -----------*/
 
-#testing_table{
+.list-page-links{
     width:70%;
+    margin: auto;
+    opacity: 0.7;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
-#td-width {
-    width: 33%;
+.log-and-sign {
+
+    width: 100%;
+    display: inline-flex;
+    margin: auto;
 }
-#login-buttons {
-    width: 200px;
+#login-signup-buttons {
+    margin-left: 3%;
+}
+#list-user-button {
+    margin-left: 67%;
+}
+#list-tags-button {
+    margin-left: 1%;
 }
 #sign-log {
     font-size: 20px;
     border: none;
     background: transparent;
     color: whitesmoke;
-    margin-left: 30px;
 }
-#search {
-    margin-left: 60px;
-}   
-#search-button {
-
-    padding: 5px;
-    margin-top: 10px;
-    margin-right: 30px;
-    border-radius: 6px;
-    border: none;
-    background-color: transparent; 
-    width: 10px;
+/* ---------SORT AND SEARCH---------- */
+.sort-menu {
+    display: flex;
+    flex-direction: column;
 }
-
-#search-cell {
-
-    background-color: rgb(219, 219, 219);
-    font-size: 20px; 
-    border-radius: 6px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    width: 300px;
-    border: none;
-    margin-bottom: 15px;
-
+.sort-and-search {
+    width: 100%;
+    text-align: right;
 }
 #sort-by {   
     font-size: 20px; 
     border-radius: 6px;
+    border: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
+.search {
+    display: flex;
+    flex-direction: column;
+}
+#search-button {
+    border-radius: 6px;
+    border: none;
+    background-color: transparent; 
+    width: 4%;
+}
+#search-cell {
+    background-color: rgb(219, 219, 219);
+    font-size: 20px; 
+    border-radius: 6px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 23.5%;
+    border: none;
+}
+/* ----------------BACK--------------- */
 #button-back-to-main {
-    margin-left: 280px; 
+    margin-left: 15%; 
     padding: 10px; 
     text-align: center; 
     font-size: 20px; 
     border-radius: 8px; 
     border: none; 
-    background-color: lightseagreen; 
+    background-color: rgb(52, 87, 85); 
     color: ivory; 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
+.list-of-questions {
+    width: 70%;
+    margin: auto;
+}
 #td-background {
-    width: 1100px; 
+    width: 90%; 
     font-size: 20px; 
     background-color: whitesmoke; 
     opacity: 0.8; 
     margin: auto; 
     border-radius: 8px;  
-    padding-left: 20px;
+    padding-left: 2%;
 }
 
 #question-link-button {
     border: none; 
     font-size: 30px; 
-    padding-left: 35px;
+    padding-left: 3%;
     background: transparent;
 }
 
@@ -221,13 +240,13 @@ table {
     display: inline; 
     color: gray; 
     font-size: medium; 
-    padding-left: 35px;
+    padding-left: 3%;
 }
 
 #datetime {
     color: gray; 
     font-size: 15px; 
-    padding-left: 750px;
+    padding-left: 75%;
 }
 #comment-datetime {
     color: gray;
@@ -235,7 +254,7 @@ table {
  
 }
 #vote-background {
-    width: 80px; 
+    width: 6%; 
     text-align: center; 
     font-size: 20px; 
     background-color: whitesmoke; 
@@ -244,7 +263,6 @@ table {
 }
 
 #vote-nr {
-    width: 50px; 
     text-align: center; 
     font-size: 25px; 
     background-color: whitesmoke; 
@@ -254,33 +272,29 @@ table {
 }
 
 #upvote-button {
-    color: green; 
+    color: rgb(108, 170, 108); 
     background: none; 
     border: none; 
     font-size: xx-large; 
-    padding-right: 20px; 
-    padding-left: 20px;
 }
 
 #downvote-button {
-    color: red; 
+    color: rgb(187, 89, 89); 
     background: none; 
     border: none; 
     font-size: xx-large;
-    padding-right: 20px; 
-    padding-left: 20px;
 }
 
 /* ------------QUESTION PAGE--------------- */
 
 #back-to-questions-button {
-    margin-left: 295px; 
+    margin-left: 17%; 
     padding: 10px; 
     text-align: center; 
     font-size: 20px; 
     border-radius: 8px; 
     border: none; 
-    background-color: lightseagreen; 
+    background-color: rgb(52, 87, 85); 
     color: ivory; 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -405,7 +419,8 @@ table {
     opacity: 0.8;
 }
 .comment-body {
-    margin-left: 18%;
+    margin-left: 20.5%;
+    margin-top: 0.5%;
 }
 #comment-button {
     border: none;
