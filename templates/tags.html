@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/static/style.css"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.discordapp.com/attachments/730458730331897949/775703314762563653/favicon-310.png">
-    <title>Tags</title>
-</head>
-<body>
-    <h1>ASK-MATE</h1>
+{% extends "list_like_block.html" %}
+{% block title %}Tags{% endblock %}
+{% block header_one_text %} List of tags {% endblock %}
+{% block table_listing %}
 
-    <ul>List of tags here
-        <li>Placeholder item</li>
-    </ul>
-</body>
-</html>
+    <section class=c-list-tags>
+
+        {% for tag in tag_list %}        
+            
+            <div class="child_tag_name">{{tag["name"]}}</div> <div class="child_tag_nr_uses">{{tag["nr_uses"]}}</div>            
+            
+        
+        {% endfor %}
+
+    </section>
+
+    
+
+{% endblock %}

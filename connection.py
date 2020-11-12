@@ -124,7 +124,7 @@ def get_sorted_inner_join_between_tables_where_table2_column_has_value_and_order
             SELECT {sql_table1_name}.* FROM {sql_table1_name} INNER JOIN {sql_table2_name}
                 ON {sql_keystring_t1} = {sql_keystring_t2}
             WHERE {sql_table2_column} = %(table2_value)s
-            ORDER BY {sql_column_string_t1} DESC
+            ORDER BY {sql_column_string_t1} ASC
         """).format(
             sql_table1_name = sql.Identifier(table1_name),
             sql_table2_name = sql.Identifier(table2_name),
@@ -307,6 +307,70 @@ def search_pattern_in_triplet_intersect(
         table3=sql.Identifier(table_list[2]),
     )
     cursor.execute(query, {"pattern_val": pattern_str})
+    result_rows = cursor.fetchall()
+
+    return result_rows
+
+
+@connection_handler
+def get_colpair_sorted_count_on_inner_join_group_by_table1_column_count_table2(
+    cursor: RealDictCursor,
+    table1_name,
+    table2_name,    
+    table2_column_to_count,
+    table1_column_to_group,
+    table1_keycol,
+    table2_keycol,        
+    table2_column_count_label="nr_counts",
+    reverse=False
+):
+    if reverse:
+        query=sql.SQL("""
+            SELECT 
+                {sql_table1}.{sql_column_table1}, 
+                count({sql_table2}.{sql_column_to_count}) AS {sql_alias_column_to_count}
+            FROM
+                {sql_table1} INNER JOIN {sql_table2}
+            ON
+                ({sql_table1}.{sql_keycol_table1} = {sql_table2}.{sql_keycol_table2})
+            GROUP BY
+                {sql_table1}.{sql_column_table1}
+            ORDER BY
+                count({sql_table2}.{sql_column_to_count}) DESC
+        """
+        ).format(
+            sql_table1 = sql.Identifier(table1_name),
+            sql_table2 = sql.Identifier(table2_name),
+            sql_keycol_table1 = sql.Identifier(table1_keycol),
+            sql_keycol_table2 = sql.Identifier(table2_keycol),
+            sql_column_table1 = sql.Identifier(table1_column_to_group),
+            sql_column_to_count = sql.Identifier(table2_column_to_count),
+            sql_alias_column_to_count = sql.Identifier(table2_column_count_label)              
+        )
+    else:    
+        query=sql.SQL("""
+            SELECT 
+                {sql_table1}.{sql_column_table1}, 
+                count({sql_table2}.{sql_column_to_count}) AS {sql_alias_column_to_count}
+            FROM
+                {sql_table1} INNER JOIN {sql_table2}
+            ON
+                ({sql_table1}.{sql_keycol_table1} = {sql_table2}.{sql_keycol_table2})
+            GROUP BY
+                {sql_table1}.{sql_column_table1}
+            ORDER BY
+                count({sql_table2}.{sql_column_to_count}) ASC
+        """
+        ).format(
+            sql_table1 = sql.Identifier(table1_name),
+            sql_table2 = sql.Identifier(table2_name),
+            sql_keycol_table1 = sql.Identifier(table1_keycol),
+            sql_keycol_table2 = sql.Identifier(table2_keycol),
+            sql_column_table1 = sql.Identifier(table1_column_to_group),
+            sql_column_to_count = sql.Identifier(table2_column_to_count),
+            sql_alias_column_to_count = sql.Identifier(table2_column_count_label)              
+        )    
+    cursor.execute(query)
     result_rows = cursor.fetchall()
 
     return result_rows

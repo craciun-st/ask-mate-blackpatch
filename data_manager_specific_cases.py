@@ -108,6 +108,18 @@ def get_tags_for_question_id(question_id_val):
         reverse=True
     )
 
+def get_tagnames_sorted_by_use_count_in_questions():
+    return connection.get_colpair_sorted_count_on_inner_join_group_by_table1_column_count_table2(
+        table1_name='tag',
+        table2_name='question_tag',
+        table2_column_to_count='question_id',
+        table1_column_to_group='name',
+        table1_keycol='id',
+        table2_keycol='tag_id',
+        table2_column_count_label='nr_uses',
+        reverse=True
+    )
+
 def get_multiple_rows_from_table_by_name(name,table_name):
     result_dict = connection.get_data_by_value_pair_from_table({'name': name}, table_name)
     return result_dict
@@ -178,3 +190,10 @@ def find_pattern_in_question_title_message_and_answer_message(given_pattern: str
     )
     id_list=[row['id'] for row in list_of_dict]
     return id_list
+
+
+if __name__ == "__main__":
+    db_tags = get_tagnames_sorted_by_use_count_in_questions()
+    for row in db_tags:
+        print(row['name'])
+    pass
