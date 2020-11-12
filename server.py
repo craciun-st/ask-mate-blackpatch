@@ -71,7 +71,9 @@ def users_page():
 
 @app.route("/tags")
 def tags_page():
-    return render_template('tags.html')
+    all_tags = data_manager.get_tagnames_sorted_by_use_count_in_questions()
+    return render_template("tags.html", tag_list=all_tags)
+
 
 
 @app.route('/list')
@@ -425,5 +427,5 @@ def display_search_results():
             return render_template("search_results.html", db_questions=db_modified_questions)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":    
     app.run(debug=True)
