@@ -13,7 +13,7 @@
     <br>
 
     <h2 id="registered-user-title"> Registered users</h2>
-<div id="users-table-background">
+<div class="users-table-background">
     <table class="users-table">
         <div id="user-table-header">
             <th id="id-th">ID</th>
@@ -24,7 +24,8 @@
             <th>Comments Posted</th>
             <th>Reputation</th>
         </div>
-
+        <tr><td id="blank-stupid-workaround"> .</td></tr>
+        
         {% for user in users_db %}
         <tr id="user-table-row">
             <td>{{user['id']}}</td>
@@ -40,6 +41,6 @@
         
     </table>
     </div>
-    
+
 </body>
 </html>
