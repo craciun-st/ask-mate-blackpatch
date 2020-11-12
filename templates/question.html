@@ -88,14 +88,14 @@
 </table>
         <!-- tag cell -->
 
-
+<!-- 
         <table id = "tags">
           
             <tr>
                 <td id="table-for-buttons">
                     <form action='/question/{{input_id}}/new-tag' method="POST">
                     <button id="add-tag-button"><span title="Add Tag"><img src="https://cdn.discordapp.com/attachments/730458730331897949/775806067266420746/imageedit_3_5137188590.png"></span></button>
-                    <!-- <input id="tag-cell" type="text" name="tagname" placeholder="Add a tag"> -->
+
                     <input id="tag-cell" type="text" list="tag-list" name="tagname" placeholder="Add a tag" autocomplete="off">
 
                     </form>
@@ -113,8 +113,39 @@
         {%endif%}                    
             </tr>
           
-        </table>
+        </table> -->
 
+
+
+<div class="section-tags">
+    <div class="tag">
+        <form action='/question/{{input_id}}/new-tag' method="POST">
+            <button id="add-tag-button">
+                <span title="Add Tag">
+                    <img src="https://cdn.discordapp.com/attachments/730458730331897949/775806067266420746/imageedit_3_5137188590.png">
+                </span>
+            </button>
+
+            <input id="tag-cell" type="text" list="tag-list" name="tagname" placeholder="Add a tag" autocomplete="off">
+
+        </form>
+    </div> 
+                        
+         {% if question_tags %}
+        {% for tag in question_tags %}      
+    <div class="tag">           
+        <p id="tag-name"> {{tag['name']}} </p>
+
+        <form action='/question/{{input_id}}/tag/{{tag["id"]}}/delete' method="GET">
+            <button id="delete-tag-button-red">
+                <span title="Delete">✕</span>
+            </button>
+        </form>
+    </div>
+            
+        {%endfor%}
+        {%endif%}                    
+</div>
 
         <br>
         <!-- comment cell -->

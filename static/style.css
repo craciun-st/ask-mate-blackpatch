@@ -351,19 +351,36 @@ table {
 
 }
 
+.section-tags {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 68%;
+    margin-left: 17%;
+}
 
-#tags {
-    margin-left: 300px;
-    padding: 5px; 
-    text-align: center; 
-    font-size: 16px; 
-    border-radius: 8px; 
-    border: none; 
-    background-color:rgb(53, 53, 53);
+.tag {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#tag-name {
+    text-align: center;
+    font-size: 16px;
     color: whitesmoke;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     opacity: 0.9;
+    background-color: rgb(73, 73, 73);
+    border-radius: 8px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    padding: 10px;
 }
+
 
 #tag-cell {
     background-color:rgb(94, 94, 94);
@@ -375,7 +392,7 @@ table {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     width: 150px;
     height: 25px;
-    margin-bottom: 5px;
+    margin-top: 10%;
     
 }
 
@@ -551,14 +568,16 @@ table {
 
 #delete-tag-button-red {
     color: rgb(161, 38, 63);
-    padding: 5px; 
     text-align: center; 
-    font-size: 35px; 
+    font-size: 30px; 
     border-radius: 8px; 
     border: none; 
     background-color: transparent;
+    margin-top: 45%;
+
    
 }
+
 
 #comment-text {
     margin-left: 300px;
