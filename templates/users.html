@@ -24,56 +24,20 @@
             <th>Comments Posted</th>
             <th>Reputation</th>
         </div>
+
+        {% for user in users_db %}
         <tr id="user-table-row">
-            <td>id_nr</td>
-            <td>Placeholder Username</td>
-            <td>a_date_________</td>
+            <td>{{user['id']}}</td>
+            <td>{{user['username']}}</td>
+            <td>{{user['date_of_registration']}}</td>
             <td>q_nr</td>
             <td>a_nr</td>
             <td>c_nr</td>
-            <td>Rep</td>
+            <td>{{user['reputation']}}</td>
             
         </tr>
-        <tr id="user-table-row">
-            <td>id_nr</td>
-            <td>Placeholder Username</td>
-            <td>a_date_________</td>
-            <td>q_nr</td>
-            <td>a_nr</td>
-            <td>c_nr</td>
-            <td>Rep</td>
-            
-        </tr>
-        <tr id="user-table-row">
-            <td>id_nr</td>
-            <td>Placeholder Username</td>
-            <td>a_date_________</td>
-            <td>q_nr</td>
-            <td>a_nr</td>
-            <td>c_nr</td>
-            <td>Rep</td>
-            
-        </tr>
-        <tr id="user-table-row">
-            <td>id_nr</td>
-            <td>Placeholder Username</td>
-            <td>a_date_________</td>
-            <td>q_nr</td>
-            <td>a_nr</td>
-            <td>c_nr</td>
-            <td>Rep</td>
-            
-        </tr>
-        <tr id="user-table-row">
-            <td>id_nr</td>
-            <td>Placeholder Username</td>
-            <td>a_date_________</td>
-            <td>q_nr</td>
-            <td>a_nr</td>
-            <td>c_nr</td>
-            <td>Rep</td>
-            
-        </tr>
+        {% endfor %}
+        
     </table>
     </div>
     

@@ -37,6 +37,50 @@ def get_comments_from_answer_id(answer_id_val):
         reverse=True
     )
 
+
+def get_author_from_answer_id(answer_id_val):
+    return connection.get_one_row_of_table1_from_inner_join_where_table2_column_has_value(
+        table1_name='users',
+        table2_name='answer',
+        table2_column='id',
+        table2_column_value=answer_id_val,
+        table1_keycol='id',
+        table2_keycol='user_id'        
+    )
+
+
+def get_author_from_question_id(question_id_val):
+    return connection.get_one_row_of_table1_from_inner_join_where_table2_column_has_value(
+        table1_name='users',
+        table2_name='question',
+        table2_column='id',
+        table2_column_value=question_id_val,
+        table1_keycol='id',
+        table2_keycol='user_id'        
+    )
+
+
+def get_user_id_from_answer_id(answer_id_val):
+    answer_row = connection.get_data_by_value_pair_from_table(
+        {'id': answer_id_val}, 'answer'
+    )[0]
+    user_id_value = answer_row['user_id']
+    
+    return user_id_value
+
+def get_user_id_from_question_id(question_id_val):
+    question_row = connection.get_data_by_value_pair_from_table(
+        {'id': question_id_val}, 'question'
+    )[0]
+    user_id_value = question_row['user_id']
+
+    return user_id_value
+    
+
+connection.get_table1_column_from_inner_join_between_tables_where_table2_column_has_value
+
+
+
 def get_username_from_answer_id(answer_id_val):
     answer_row = connection.get_data_by_value_pair_from_table(
         {'id': answer_id_val}, 'answer'

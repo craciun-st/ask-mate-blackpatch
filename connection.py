@@ -141,6 +141,39 @@ def get_sorted_inner_join_between_tables_where_table2_column_has_value_and_order
 
 
 @connection_handler
+def get_one_row_of_table1_from_inner_join_where_table2_column_has_value(
+    cursor: RealDictCursor,
+    table1_name,
+    table2_name,    
+    table2_column,
+    table2_column_value,
+    table1_keycol,
+    table2_keycol,        
+):
+    list1 = [table1_name, table1_keycol]
+    list2 = [table2_name, table2_keycol]        
+    keystring_t1 = sql.SQL('.').join(sql.Identifier(n) for n in list1)
+    keystring_t2 = sql.SQL('.').join(sql.Identifier(n) for n in list2)
+    
+    query=sql.SQL("""
+        SELECT {sql_table1_name}.* FROM {sql_table1_name} INNER JOIN {sql_table2_name}
+            ON {sql_keystring_t1} = {sql_keystring_t2}
+        WHERE {sql_table2_name}.{sql_table2_column} = %(table2_value)s            
+    """).format(
+        sql_table1_name = sql.Identifier(table1_name),
+        sql_table2_name = sql.Identifier(table2_name),
+        sql_keystring_t1 = keystring_t1,
+        sql_keystring_t2 = keystring_t2,
+        sql_table2_column = sql.Identifier(table2_column)            
+        )    
+
+    cursor.execute(query, {"table2_value": table2_column_value})
+    result_row = cursor.fetchone()
+
+    return result_row
+
+
+@connection_handler
 def get_max_serial_from_table(cursor: RealDictCursor, table_name):
     query=sql.SQL("""
         SELECT max({sql_id}) FROM {sql_table_name}
@@ -392,4 +425,5 @@ if __name__ == "__main__":
     # print( get_data_from_table('question') )
     # append_row_in_table({'submission_time':datetime.datetime.now(),'view_number':3,'vote_number':7},'comment')
     # update_data_question({'id':3,'title':'New line'})
+    
     pass

@@ -74,6 +74,14 @@ def convert_time_to_str(date_time_obj: datetime.datetime):
     return time_str
 
 
+def make_str_as_int_or_zero(some_str):
+    try:
+        my_int = int(some_str)
+    except (TypeError, ValueError):
+        my_int = 0  # reset the number if it's stored as a malformed string    
+    return my_int
+
+
 
 
 
