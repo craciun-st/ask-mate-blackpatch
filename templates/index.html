@@ -22,13 +22,13 @@
                 List of Questions</button></form>
         <br>
         <br>
-
+        {%if is_logged_in%}
         <form action="/add-question">
             <button id="main-page-button">
                 Add a new question!</button></form>
         <br>
         <br>
-        {%if is_logged_in%}
+        
         <form action="/logout">
             <button id="main-page-button">
                 Logout</button></form>

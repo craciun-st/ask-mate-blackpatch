@@ -14,16 +14,18 @@
 <table id='testing_table'>
     <tr>
         <td id="td-width">
+            {%if is_logged_in == False%}
             <form id="login-buttons" action="/registration">
                 <button id="sign-log">Sign Up</button>
             </form>
+            {%endif%}
         </td>
         <td id="td-width">
                 <form id="login-buttons" action="/users">
         <button id="sign-log"><img src="https://cdn.discordapp.com/attachments/730458730331897949/776183888355524608/user-20.png"> Users</button>
     </form>
         </td>
-
+        
 
 <td id="td-width">
     <!-- there is a drop-down for our sorting parameters -->
@@ -59,9 +61,11 @@
     </tr>
         <tr>
         <td id="td-width">
+            {%if is_logged_in == False%}
             <form id="login-buttons" action="/login">
                 <button id="sign-log">Log in</button>
             </form>
+            {%endif%}
 </td>
 <td id="td-width">
     <form id="login-buttons" action="/tags">
