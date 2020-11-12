@@ -141,79 +141,97 @@ table {
 }
 /* ------------ LIST PAGE -----------*/
 
-#testing_table{
+.list-page-links{
     width:70%;
+    margin: auto;
+    opacity: 0.7;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
-#td-width {
-    width: 33%;
+.log-and-sign {
+    width: 100%;
+    display: inline-flex;
+    margin: auto;
 }
-#login-buttons {
-    width: 200px;
+#login-signup-buttons {
+    margin-left: 3%;
+}
+#list-user-button {
+    margin-left: 67%;
+}
+#list-tags-button {
+    margin-left: 1%;
 }
 #sign-log {
     font-size: 20px;
     border: none;
     background: transparent;
     color: whitesmoke;
-    margin-left: 30px;
 }
-#search {
-    margin-left: 60px;
-}   
-#search-button {
-
-    padding: 5px;
-    margin-top: 10px;
-    margin-right: 30px;
-    border-radius: 6px;
-    border: none;
-    background-color: transparent; 
-    width: 10px;
+/* ---------SORT AND SEARCH---------- */
+.sort-menu {
+    display: flex;
+    flex-direction: column;
 }
-
-#search-cell {
-
-    background-color: rgb(219, 219, 219);
-    font-size: 20px; 
-    border-radius: 6px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    width: 300px;
-    border: none;
-    margin-bottom: 15px;
-
+.sort-and-search {
+    width: 100%;
+    text-align: right;
 }
 #sort-by {   
     font-size: 20px; 
     border-radius: 6px;
+    border: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
+.search {
+    display: flex;
+    flex-direction: column;
+}
+#search-button {
+    border-radius: 6px;
+    border: none;
+    background-color: transparent; 
+    width: 4%;
+}
+#search-cell {
+    background-color: rgb(219, 219, 219);
+    font-size: 20px; 
+    border-radius: 6px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 23.5%;
+    border: none;
+}
+/* ----------------BACK--------------- */
 #button-back-to-main {
-    margin-left: 280px; 
+    margin-left: 15%; 
     padding: 10px; 
     text-align: center; 
     font-size: 20px; 
     border-radius: 8px; 
     border: none; 
-    background-color: lightseagreen; 
+    background-color: rgb(52, 87, 85); 
     color: ivory; 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
+.list-of-questions {
+    width: 70%;
+    margin: auto;
+}
 #td-background {
-    width: 1100px; 
+    width: 90%; 
     font-size: 20px; 
     background-color: whitesmoke; 
     opacity: 0.8; 
     margin: auto; 
     border-radius: 8px;  
-    padding-left: 20px;
+    padding-left: 2%;
 }
 
 #question-link-button {
     border: none; 
     font-size: 30px; 
-    padding-left: 35px;
+    padding-left: 3%;
     background: transparent;
 }
 
@@ -221,13 +239,13 @@ table {
     display: inline; 
     color: gray; 
     font-size: medium; 
-    padding-left: 35px;
+    padding-left: 3%;
 }
 
 #datetime {
     color: gray; 
     font-size: 15px; 
-    padding-left: 750px;
+    padding-left: 75%;
 }
 #comment-datetime {
     color: gray;
@@ -235,7 +253,7 @@ table {
  
 }
 #vote-background {
-    width: 80px; 
+    width: 6%; 
     text-align: center; 
     font-size: 20px; 
     background-color: whitesmoke; 
@@ -244,7 +262,6 @@ table {
 }
 
 #vote-nr {
-    width: 50px; 
     text-align: center; 
     font-size: 25px; 
     background-color: whitesmoke; 
@@ -254,33 +271,29 @@ table {
 }
 
 #upvote-button {
-    color: green; 
+    color: rgb(108, 170, 108); 
     background: none; 
     border: none; 
     font-size: xx-large; 
-    padding-right: 20px; 
-    padding-left: 20px;
 }
 
 #downvote-button {
-    color: red; 
+    color: rgb(187, 89, 89); 
     background: none; 
     border: none; 
     font-size: xx-large;
-    padding-right: 20px; 
-    padding-left: 20px;
 }
 
 /* ------------QUESTION PAGE--------------- */
 
 #back-to-questions-button {
-    margin-left: 295px; 
+    margin-left: 17%; 
     padding: 10px; 
     text-align: center; 
     font-size: 20px; 
     border-radius: 8px; 
     border: none; 
-    background-color: lightseagreen; 
+    background-color: rgb(52, 87, 85); 
     color: ivory; 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -405,7 +418,8 @@ table {
     opacity: 0.8;
 }
 .comment-body {
-    margin-left: 18%;
+    margin-left: 20.5%;
+    margin-top: 0.5%;
 }
 #comment-button {
     border: none;
@@ -724,108 +738,99 @@ table {
 }
 
 /* -------------USERS PAGE----------------- */
-#registered-user-title {
+#page-title {
     color: whitesmoke;
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif; 
     font-size: 30px;
-    padding-bottom: 40px;
+    padding-bottom: 2%;
+}
+.users-table-background {
+    background-color: whitesmoke;
+    width: 70%;
+    padding: 2% 0;
+    margin: auto;
+    margin-bottom: 5%;
+    opacity: 0.8;
+    border-radius: 26px;
+    overflow: auto;
 }
 
 .users-table {
     color: rgb(0, 0, 0);
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif; 
-    padding: 20px;
     width: 95%;
     border-collapse: collapse;
 
-
 }
 th {
+    border-left: dashed gray 1px;
+    border-right: dashed gray 1px;
     text-align: center;
-    height: 30px;
-    padding-bottom: 20px;
+    height: 5%;
+    /* padding-bottom: 2%; */
     font-size: 20px;
-
+}
+th:first-child{
+    border-left: none;
+}
+th:last-child {
+    border-right: none;
 }
 #id-th {
-    width: 70px;
+    width: 8%;
 }
-
-#user-table-row:nth-child(even) {
+#user-table-row:nth-child(odd) {
     background-color: rgba(68, 150, 147, 0.295);
-
-   
 }
 #user-table-row {
-    height: 60px;
-    padding-left: 20px;    
+    height: 50px;
+    padding-left: 2%;    
     text-align: center;
 
 }
-#users-table-background {
-    background-color: whitesmoke;
-    width: 70%;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    margin: auto;
-    opacity: 0.8;
-    border-radius: 26px;
-
-   
+#blank-stupid-workaround {
+    visibility: hidden;
 }
 
+/* ----------TAG PAGE--------- */
 .c-list-tags{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    row-gap: 20px;
-    justify-items: start;
-    width: max-content;
-    /* column-gap: 20px; */
+    background-color: rgba(245, 245, 245, 0.164);
+    width: 70%;
     margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1%;    
+    row-gap: 8px;
+    border-radius: 18px;
+    padding: 2% 0;
+    justify-content: center;
+    overflow: auto;
 }
 
 .child_tag_name{
-    grid-column: 1;
-    justify-self: end;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color: whitesmoke;
     font-size: 20px;
-    background-color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.486);
     opacity: 0.8; 
-    border-radius: 8px;
-    /* padding-left: 20px; */
+    border-radius: 18px;
+    column-gap: 10px;
 }
 
 .child_tag_nr_uses{
     grid-column: 2;    
     font-size: 20px; 
-    background-color: whitesmoke; 
-    opacity: 0.8; 
+    background-color: rgba(41, 112, 110, 0.918); 
     margin: auto; 
-    border-radius: 8px;  
-    /* padding-left: 20px; */
+    border-radius: 100%; 
+    padding: 2px 8px;
 }
 
 .c-list-tags div{
-    padding: 40px;
+    padding: 1%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* -------------TAGS PAGE----------------- */
