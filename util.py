@@ -1,5 +1,6 @@
 #helper functions
 from flask import Markup
+import connection
 import data_manager
 import datetime
 import bcrypt
@@ -15,6 +16,21 @@ def verify_password(password, hashed_password):
     hashed_bytes_password = hashed_password.encode('utf-8')
     return bcrypt.checkpw(password.encode('utf-8'), hashed_bytes_password)
 
+def verify_username(username):
+    list_of_usernames_in_db = data_manager.get_list_of_values_for_column_in_db_table('username','users')
+    if username in list_of_usernames_in_db:
+        return True
+    else:
+        return False
+
+def verify_login(username,password):
+    if verify_username(username):
+        user_row = connection.get_data_by_value_pair_from_table({'username': username}, 'users')[0]
+        hashed_password = user_row['password']
+        is_a_match = verify_password(password,hashed_password)
+        return is_a_match
+    else:
+        return False
 
 def embed_substring_in_CSS_class(substring: str):
     return lambda full_string: Markup(full_string.replace(
