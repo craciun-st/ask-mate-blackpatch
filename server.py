@@ -67,7 +67,8 @@ def registration_page():
 
 @app.route("/users")
 def users_page():
-    return render_template('users.html')
+    users_db = data_manager.get_all_rows_from_table('users')
+    return render_template('users.html', users_db=users_db)
 
 @app.route("/tags")
 def tags_page():
@@ -209,13 +210,17 @@ def update_with_new_question():
 def vote_up(question_id):
     #
     question = data_manager.get_from_table_by_id(question_id, 'question')
-    try:
-        vote_nr = int(question['vote_number'])
-    except (TypeError, ValueError):
-        vote_nr = 0  # reset the vote_number if it's stored as a malformed string
+    question_author = data_manager.get_author_from_question_id(question_id)
+    vote_nr = util.make_str_as_int_or_zero(question['vote_number'])
+    author_rep = util.make_str_as_int_or_zero(question_author['reputation'])
+
     vote_nr += 1
+    author_rep += 5
+    
     question['vote_number'] = vote_nr
+    question_author['reputation'] = author_rep
     data_manager.write_modified_row_in_table(question, 'question')
+    data_manager.write_modified_row_in_table(question_author, 'users')
     return redirect("/list")
 
 
@@ -223,13 +228,17 @@ def vote_up(question_id):
 def vote_down(question_id):
     # a button for voting down, it substracts our votes and writes it in our data base
     question = data_manager.get_from_table_by_id(question_id, 'question')
-    try:
-        vote_nr = int(question['vote_number'])
-    except (TypeError, ValueError):
-        vote_nr = 0  # reset the vote_number if it's stored as a malformed string
+    question_author = data_manager.get_author_from_question_id(question_id)
+    vote_nr = util.make_str_as_int_or_zero(question['vote_number'])
+    author_rep = util.make_str_as_int_or_zero(question_author['reputation'])
+
     vote_nr -= 1
+    author_rep -= 2
+    
     question['vote_number'] = vote_nr
+    question_author['reputation'] = author_rep
     data_manager.write_modified_row_in_table(question, 'question')
+    data_manager.write_modified_row_in_table(question_author, 'users')
     return redirect("/list")
 
 
@@ -271,28 +280,36 @@ def answer(question_id):
 @app.route('/answer/<answer_id>/vote_up')
 def vote_up_answer(answer_id):
     answer = data_manager.get_from_table_by_id(answer_id, 'answer')
-    question_id_as_str = str(answer['question_id'])
-    try:
-        vote_nr = int(answer['vote_number'])
-    except (TypeError, ValueError):
-        vote_nr = 0  # reset the vote_number if it's stored as a malformed string
+    answer_author = data_manager.get_author_from_answer_id(answer_id)
+    question_id_as_str = str(answer['question_id'])        
+    vote_nr = util.make_str_as_int_or_zero(answer['vote_number'])
+    author_rep = answer_author['reputation']
+    
     vote_nr += 1
+    author_rep += 10
+    
     answer['vote_number'] = vote_nr
+    answer_author['reputation'] = author_rep
     data_manager.write_modified_row_in_table(answer, 'answer')
+    data_manager.write_modified_row_in_table(answer_author, 'users')
     return redirect("/question/" + question_id_as_str)
 
 
 @app.route('/answer/<answer_id>/vote_down')
 def vote_down_answer(answer_id):
     answer = data_manager.get_from_table_by_id(answer_id, 'answer')
-    question_id_as_str = str(answer['question_id'])
-    try:
-        vote_nr = int(answer['vote_number'])
-    except (TypeError, ValueError):
-        vote_nr = 0  # reset the vote_number if it's stored as a malformed string
+    answer_author = data_manager.get_author_from_answer_id(answer_id)
+    question_id_as_str = str(answer['question_id'])        
+    vote_nr = util.make_str_as_int_or_zero(answer['vote_number'])
+    author_rep = answer_author['reputation']
+    
     vote_nr -= 1
+    author_rep -= 2
+    
     answer['vote_number'] = vote_nr
+    answer_author['reputation'] = author_rep
     data_manager.write_modified_row_in_table(answer, 'answer')
+    data_manager.write_modified_row_in_table(answer_author, 'users')
     return redirect("/question/" + question_id_as_str)
 
 
