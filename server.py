@@ -29,21 +29,41 @@ def get_uploaded_file(filename):
 
 @app.route("/")
 def main_page():
-    return render_template('index.html')
+    if 'username' in session:
+        is_logged_in = True
+    else:
+        is_logged_in = False
+    return render_template('index.html', is_logged_in = is_logged_in)
 
 @app.route("/login", methods = ['POST','GET'])
 def login_page():
-    return render_template('login.html')
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if util.verify_login(username,password) == True:
+            session['username'] = username
+            return redirect('/')
+        else:
+            return render_template('login.html', correct_credentials = False)
+
+    return render_template('login.html', correct_credentials = True)
+
+@app.route("/logout")
+def logout():
+    session.pop('username', None)
+    return redirect('/')
 
 @app.route("/registration", methods = ['POST','GET'])
 def registration_page():
     if request.method == 'POST':
         posted_data = request.form
-        username = request.form['username']
-        pw = request.form['password']
-        data_manager.filling_missing_fields_user(posted_data)
-        return redirect("/")
-    return render_template('registration.html')
+        is_already_used = util.verify_username(posted_data['username'])
+        if is_already_used == False:
+            data_manager.filling_missing_fields_user(posted_data)
+            return redirect("/")
+        else:
+            return render_template('registration.html', correct_credentials = False)
+    return render_template('registration.html', correct_credentials = True)
 
 @app.route("/users")
 def users_page():

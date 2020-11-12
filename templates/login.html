@@ -20,12 +20,15 @@
                 <br>
             <label for="pw" id="username-pw">Password</label>
                 <br>
-                <input type="password" id="username-pw-cell" placeholder="password">
+                <input type="password" id="username-pw-cell" name = 'password' placeholder="password">
                 <br>
                 <input type="submit" value="Sign In" id="login-button">
             <label for="remember" id="remember-me">
                 <input type="checkbox" value="remember">Remember me
             </label>
+            {%if correct_credentials == False%}
+            <p>Invalid user/password</p>
+            {%endif%}
             <button id="forgot"><span title="Just kidding, this doesn't do anything">Forgot password?</span></button>
             
         </form>

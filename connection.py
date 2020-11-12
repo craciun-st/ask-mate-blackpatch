@@ -52,6 +52,7 @@ def get_specific_columns_from_table(cursor: RealDictCursor, column_name_list, ta
         )
     cursor.execute(query)
     result_rows = cursor.fetchall()
+    return result_rows
 
 
 @connection_handler
