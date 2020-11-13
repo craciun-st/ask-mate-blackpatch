@@ -148,21 +148,16 @@ table {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 .log-and-sign {
-    width: 100%;
     display: inline-flex;
-    margin: auto;
 }
-#login-signup-buttons {
-    margin-left: 3%;
+
+.user-and-tags {
+    display: inline-flex;
 }
-#list-user-button {
-    margin-left: 67%;
-}
-#list-tags-button {
-    margin-left: 1%;
-}
+
 #sign-log {
     font-size: 20px;
     border: none;
@@ -170,13 +165,17 @@ table {
     color: whitesmoke;
 }
 /* ---------SORT AND SEARCH---------- */
+.sort-and-search {
+    width: 70%;
+    text-align: right;
+    margin: auto;
+}
 .sort-menu {
     display: flex;
+    margin-left: auto;
     flex-direction: column;
-}
-.sort-and-search {
-    width: 100%;
-    text-align: right;
+    width: 50%;
+
 }
 #sort-by {   
     font-size: 20px; 
@@ -187,19 +186,23 @@ table {
 .search {
     display: flex;
     flex-direction: column;
+    width: 50%;
+    margin-left: auto;
+
 }
 #search-button {
     border-radius: 6px;
     border: none;
     background-color: transparent; 
-    width: 4%;
+    width: 5%;
+    margin-right: 2%;
 }
 #search-cell {
     background-color: rgb(219, 219, 219);
     font-size: 20px; 
     border-radius: 6px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    width: 23.5%;
+    width: 47%;
     border: none;
 }
 /* ----------------BACK--------------- */
@@ -469,10 +472,12 @@ table {
     font-size: 16px; 
     padding-bottom: 2%;
 }
+
+/* ----------LOGIN PAGE--------- */
 #overlay {
     width: 25%;
     margin: 5% auto;
-    height: 500px;
+    height: 45%;
     background-color: rgb(226, 226, 226);
     border-radius: 30px;
     
@@ -494,6 +499,20 @@ table {
     font-size: 16px;
     padding-top: 15px;
 } 
+#sign-up-redirect-container {
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    padding-bottom: 8%;
+
+}
+#sign-up-redirect {
+
+    border: none;
+    background: transparent;
+    font-size: 16px;   
+    color: rgb(43, 88, 131); 
+}
 
 #login-form{
     display: flex;
@@ -524,14 +543,24 @@ table {
    
 }
 #login-button {
-    margin-top: 25px;
+    margin-top:8%;
     background-color: lightseagreen;
     border: none;
     color: whitesmoke;
     font-size: 25px;
     border-radius: 8px;
     padding: 6px;
-    width: 100px;
+    width: 29%;
+}
+#signup-button {
+    margin: 8% 0 15%;
+    background-color: lightseagreen;
+    border: none;
+    color: whitesmoke;
+    font-size: 25px;
+    border-radius: 8px;
+    padding: 6px;
+    width: 29%;
 }
 
 #forgot {
@@ -541,7 +570,7 @@ table {
     margin-top: 15px;
     color: rgb(43, 88, 131);
 }
-
+/* ///////////////////////////////// */
 #add-tag-button {
     text-align: center; 
     border: none;

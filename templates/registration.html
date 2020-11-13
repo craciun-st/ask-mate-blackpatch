@@ -12,7 +12,7 @@
     <h1>Ask-Mate</h1>
     <section id="overlay">
         <form method='POST' id='login-form'> 
-            <h1 id="login-text">Register</h1>
+            <h1 id="login-text">Sign Up</h1>
             <hr id="breakline">
             <label for="username" id="username-pw">Username</label>
                 <br>
@@ -22,10 +22,8 @@
                 <br>
                 <input type="password" id="username-pw-cell" name= "password" placeholder="password">
                 <br>
-                <input type="submit" value="Sign Up" id="login-button">
-            <label for="remember" id="remember-me">
-                <input type="checkbox" value="remember">Remember me
-            </label>
+                <input type="submit" value="Sign Up" id="signup-button">
+
             {%if correct_credentials == False%}
            <p>Username already exists!</p>
            {%endif%}
