@@ -491,7 +491,7 @@ def user_page(user_id):
 
 
 if __name__ == "__main__":
-    print(data_manager.get_from_table_by_id('2','users'))
-    print(data_manager.get_username_from_user_id('2'))
-    print(data_manager.compose_dict_for_user_page('Admin'))    
+    # print(data_manager.get_from_table_by_id('2','users'))
+    # print(data_manager.get_username_from_user_id('2'))
+    # print(data_manager.compose_dict_for_user_page('Admin'))    
     app.run(debug=True)
