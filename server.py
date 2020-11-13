@@ -67,7 +67,8 @@ def registration_page():
 
 @app.route("/users")
 def users_page():
-    users_db = data_manager.get_all_rows_from_table('users')
+    users_db = data_manager.magic_get_users_hardcoded_labels()
+    users_db = data_manager.update_dicts_with_utctime_str(users_db)
     return render_template('users.html', users_db=users_db)
 
 @app.route("/tags")
@@ -92,7 +93,7 @@ def listing():
         column_to_order_by=sort_by,
         reverse=is_descending
     )
-    questions = data_manager.update_dict_with_utctime_str(questions)
+    questions = data_manager.update_dicts_with_utctime_str(questions)
     
 
     return render_template('list.html', db_questions=questions, is_logged_in = is_logged_in)
@@ -108,7 +109,7 @@ def question(question_id):
     question_comments = data_manager.get_multiple_rows_for_question_id(
         question_id, 'comment')
     question_tags =data_manager.get_tags_for_question_id(question_id)
-    question_comments = data_manager.update_dict_with_utctime_str(question_comments)
+    question_comments = data_manager.update_dicts_with_utctime_str(question_comments)
 
     for this_question_comment in question_comments:
         current_user = data_manager.get_username_from_user_id(this_question_comment['user_id'])
@@ -120,7 +121,7 @@ def question(question_id):
         for answer in answers:
             curr_comments = data_manager.get_comments_from_answer_id(
                 answer['id'])
-            curr_comments = data_manager.update_dict_with_utctime_str(curr_comments)
+            curr_comments = data_manager.update_dicts_with_utctime_str(curr_comments)
 
             for this_answer_comment in curr_comments:
                 current_user = data_manager.get_username_from_user_id(this_answer_comment['user_id'])

@@ -1,6 +1,6 @@
 from data_manager_specific_cases import *
 import connection
-
+from connection import magic_get_users_hardcoded_labels
 import datetime
 import csv
 import util
@@ -137,13 +137,17 @@ def fill_missing_fields_from_table(partial_dict,table_name, file_path=None):
 
 
 
-def update_dict_with_utctime_str(my_dict: dict):
+def update_dicts_with_utctime_str(my_dict_list):
+    for i in range(len(my_dict_list)):
+        if 'submission_time' in my_dict_list[i]:
+            time_str_for_this_row = util.convert_time_to_str(
+                my_dict_list[i]['submission_time'])
+            my_dict_list[i].update({'utctime_str': time_str_for_this_row})
+        if 'date_of_registration' in my_dict_list[i]:
+            time_str_for_this_row = util.convert_time_to_str(
+                my_dict_list[i]['date_of_registration'])
+            my_dict_list[i].update({'date_of_reg_utc': time_str_for_this_row})
 
-    for i in range(len(my_dict)):
-        time_str_for_this_row = util.convert_time_to_str(
-            my_dict[i]['submission_time'])
-        my_dict[i].update({'utctime_str': time_str_for_this_row})
-
-    return my_dict
+    return my_dict_list
 
     
