@@ -10,13 +10,42 @@
 <body>
     <h1>ASK  — MATE</h1>
 
+    <br>
+<h2 id="page-title">My Profile</h2>
 
     <section class = "user-overlay">
-        <p>user id {{user_details['id']}}</p>
-        <p>user date_of_registration {{user_details['date_of_registration']}}</p>
-        <p>user has {{user_counts['answers']}} answers</p>
-        <p>user has {{user_counts['comments']}} comments</p>
-        <p>user has {{user_counts['questions']}} questions</p>
+        <div class= "user-info">
+            <table class="user-table">
+            <tr id = "info">
+                <td id="td-user-info">Username</td>
+                <td>{{user_details['username']}}</td>
+            </tr>
+            <tr id = "info">
+                <td id="td-user-info">ID: </td>
+                    <td>{{user_details['id']}}</td>
+            </tr>
+            <tr id = "info">
+                <td id="td-user-info">Date of registration</td> 
+                <td>{{user_details['date_of_registration']}}</td>
+            </tr>
+            <tr id = "info">
+                <td id="td-user-info">Questions posted </td>
+                <td>{{user_counts['questions']}}</td>
+            </tr>
+            <tr id = "info">
+                <td id="td-user-info">Answers Posted</td>
+                <td>{{user_counts['answers']}}</td>
+            </tr>
+            <tr id = "info">
+                <td id="td-user-info">Comments</td>
+                <td>{{user_counts['comments']}}</td>
+            </tr>
+            <tr id = "info">
+                <td id="td-user-info">Reputation</td> 
+                <td>{{user_details['reputation']}}</td>
+            </tr>
+            </table>
+        </div>
     </section>
 </body>
 </html>

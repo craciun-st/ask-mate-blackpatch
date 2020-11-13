@@ -27,9 +27,7 @@ h1 {
     opacity: 0.8;
     padding: 30px; 
     color: rgb(75, 145, 148); 
-    margin-top: 0px;
-
-    
+    margin-top: 0px;   
 }
 
 label {
@@ -473,7 +471,37 @@ table {
     padding-bottom: 2%;
 }
 /* -----------USER PAGE--------- */
-.user-overlay
+.user-overlay {
+    width: 50%;
+    margin: auto;
+    color: whitesmoke;
+    background-color: whitesmoke;
+    opacity: 0.8;
+    border-radius: 26px;
+    padding: 2%;
+    overflow: auto;
+}
+.user-table {
+    color: rgb(43, 43, 43);
+    text-align: left;
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
+    width: 95%;
+    border-collapse: collapse;
+
+
+}
+
+#td-user-info {
+    padding-left: 4%;
+    width: 55%;
+}
+#info {
+    font-size: 25px;
+    height: 50px;
+}
+#info:nth-child(even){
+    background-color: rgba(68, 150, 147, 0.295);
+}
 /* ----------LOGIN PAGE--------- */
 #overlay {
     width: 25%;
@@ -505,10 +533,8 @@ table {
     margin: auto;
     text-align: center;
     padding-bottom: 8%;
-
 }
 #sign-up-redirect {
-
     border: none;
     background: transparent;
     font-size: 16px;   
