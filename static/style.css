@@ -703,7 +703,7 @@ table {
 }
 
 .c-search-phrase {
-    background-color: yellow;
+    background-color: rgba(53, 139, 117, 0.555);
 }
 
 /* ----- EDIT QUESTION PAGE ------- */
@@ -863,4 +863,17 @@ th:last-child {
 
 .c-list-tags div{
     padding: 1%;
+}
+/* ----------SEARCH PAGE--------- */
+
+.search-table {
+    width: 60%;
+}
+
+.answer-search-table {
+    width: 60%;
+}
+.answer-vote-search {
+    background: rgb(83, 83, 83);
+    border-radius: 8px;
 }

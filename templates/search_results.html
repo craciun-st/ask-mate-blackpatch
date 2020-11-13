@@ -2,7 +2,7 @@
 {% block title %}Search results{% endblock %}
 {% block header_one_text %} Search results {% endblock %}
 {% block table_listing %}
-<table>
+<table class="search-table">
     {% for row in db_questions %}            
     <tr>
         <td id="td-background"><br><form action="/question/{{row['id']}}">
@@ -21,12 +21,12 @@
     </tr>
     {% if row["answer_list"] %}
     <tr>
-        <table>
+        <table class ="answer-search-table">
             {% for row_answer in row["answer_list"] %}
             <tr>
-                <td></td>
-                <td id="answer-body">▶   {{row_answer["message"]}}</td>               
-                <td id="answer-vote-nr">{{row_answer["vote_number"]}}</td>
+                <!-- <td></td> -->
+                <td id="answer-body">   {{row_answer["message"]}}</td>               
+                <td class="answer-vote-search" id="answer-vote-nr">{{row_answer["vote_number"]}}</td>
       
     
             </tr>
