@@ -410,15 +410,19 @@ def get_colpair_sorted_count_on_inner_join_group_by_table1_column_count_table2(
     return result_rows
 
 @connection_handler
-def get_count_of_users_id_from_table(cursor: RealDictCursor, table_name):
+def get_count_of_users_id_from_table(cursor: RealDictCursor, table_name, username_val):
     query=sql.SQL("""
-        select username, COUNT(users.id) from {sql_table_name} inner JOIN users
-        ON {sql_table_name}.user_id = users.id
-        GROUP BY username
+        SELECT u.username, COUNT({sql_table_name}.user_id) 
+        FROM 
+            {sql_table_name} RIGHT JOIN users AS u
+        ON {sql_table_name}.user_id = u.id
+        GROUP BY u.username
+        HAVING
+            u.username = %(current_user)s
     """).format(sql_table_name= sql.Identifier(table_name))
-    cursor.execute(query)
-    result_rows = cursor.fetchall()
-    return result_rows
+    cursor.execute(query, {'current_user': username_val})
+    result_row = cursor.fetchone()
+    return result_row
 
 
 
@@ -471,4 +475,5 @@ if __name__ == "__main__":
     # append_row_in_table({'submission_time':datetime.datetime.now(),'view_number':3,'vote_number':7},'comment')
     # update_data_question({'id':3,'title':'New line'})
     # print(magic_get_users_hardcoded_labels())
+    print(get_count_of_users_id_from_table('comment', 'average_joe'))
     pass

@@ -137,9 +137,9 @@ def fill_missing_fields_from_table(partial_dict,table_name, file_path=None):
 
 def compose_dict_for_user_page(username):
     compose_dict = {}
-    compose_dict.update({'comments':get_count_of_comments_by_username(username)['count']})
-    compose_dict.update({'answers':get_count_of_answers_by_username(username)['count']})
-    compose_dict.update({'questions':get_count_of_questions_by_username(username)['count']})
+    compose_dict.update({'comments': get_count_of_comments_by_username(username)['count']})
+    compose_dict.update({'answers': get_count_of_answers_by_username(username)['count']})
+    compose_dict.update({'questions': get_count_of_questions_by_username(username)['count']})
     return compose_dict
 
 def update_dicts_with_utctime_str(my_dict_list):

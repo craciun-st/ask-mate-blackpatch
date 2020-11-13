@@ -246,22 +246,16 @@ def find_pattern_in_question_title_message_and_answer_message(given_pattern: str
 
 
 def get_count_of_questions_by_username(username):
-    usernames_and_count = connection.get_count_of_users_id_from_table('question')
-    for row in usernames_and_count:
-        if row['username'] == username:
-            return row
+    row = connection.get_count_of_users_id_from_table('question', username)    
+    return row
 
 def get_count_of_answers_by_username(username):
-    usernames_and_count = connection.get_count_of_users_id_from_table('answer')
-    for row in usernames_and_count:
-        if row['username'] == username:
-            return row
+    row = connection.get_count_of_users_id_from_table('answer', username)
+    return row
 
 def get_count_of_comments_by_username(username):
-    usernames_and_count = connection.get_count_of_users_id_from_table('comment')
-    for row in usernames_and_count:
-        if row['username'] == username:
-            return row
+    row = connection.get_count_of_users_id_from_table('comment', username)
+    return row
 
 if __name__ == "__main__":
     pass
