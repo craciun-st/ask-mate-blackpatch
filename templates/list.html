@@ -11,10 +11,20 @@
 <body>
     <h1>ASK  — MATE</h1>
 
+
+
 <div class = "list-page-links">
 
 <!-- -------SIGNUP & LOGIN-------- -->
     <div class="log-and-sign">
+        <p>
+            {%if is_logged_in == True%}
+            <form action="/users/{{as_user_id}}">
+                <button id="sign-log" >My Profile</button>
+            </form>
+            {%endif%}
+        </p>
+
         <p>
             {%if is_logged_in == False%}
             <form id="login-signup-buttons" action="/registration">
