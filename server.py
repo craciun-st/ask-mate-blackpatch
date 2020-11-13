@@ -82,8 +82,10 @@ def tags_page():
 def listing():
     if 'username' in session:
         is_logged_in = True
+        user_id = data_manager.get_user_id_from_username(session['username'])
     else:
         is_logged_in = False
+        user_id = None
     sort_by = request.args["sort-by"] if 'sort-by' in request.args.keys() else "submission_time"
     sort_order = request.args["sort-order"] if 'sort-order' in request.args.keys() else "true"
     is_descending = (sort_order.lower() in ['true', 't', 'yes'])
@@ -96,7 +98,7 @@ def listing():
     questions = data_manager.update_dicts_with_utctime_str(questions)
     
 
-    return render_template('list.html', db_questions=questions, is_logged_in = is_logged_in)
+    return render_template('list.html', db_questions=questions, is_logged_in = is_logged_in, as_user_id = user_id)
 
 
 @app.route('/question/<question_id>')
@@ -488,7 +490,10 @@ def user_page(user_id):
     username = data_manager.get_username_from_user_id(user_id)
     user_counts = data_manager.compose_dict_for_user_page(username)
     user_details = data_manager.get_from_table_by_id(user_id,'users')
-    return render_template('user_page.html', username= username, user_counts = user_counts, user_details= user_details)
+    return render_template('user_page.html',    username= username, 
+                                                user_counts = user_counts, 
+                                                user_details= user_details, 
+                                                id=user_id)
 
 
 if __name__ == "__main__":

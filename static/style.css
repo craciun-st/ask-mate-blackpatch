@@ -472,7 +472,8 @@ table {
     font-size: 16px; 
     padding-bottom: 2%;
 }
-
+/* -----------USER PAGE--------- */
+.user-overlay
 /* ----------LOGIN PAGE--------- */
 #overlay {
     width: 25%;

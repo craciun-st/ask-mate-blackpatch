@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Page</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.discordapp.com/attachments/730458730331897949/775703314762563653/favicon-310.png">
 </head>
 <body>
-    <p>user id {{user_details['id']}}</p>
-    <p>user date_of_registration {{user_details['date_of_registration']}}</p>
-    <p>user has {{user_counts['answers']}} answers</p>
-    <p>user has {{user_counts['comments']}} comments</p>
-    <p>user has {{user_counts['questions']}} questions</p>
+    <h1>ASK  — MATE</h1>
+
+
+    <section class = "user-overlay">
+        <p>user id {{user_details['id']}}</p>
+        <p>user date_of_registration {{user_details['date_of_registration']}}</p>
+        <p>user has {{user_counts['answers']}} answers</p>
+        <p>user has {{user_counts['comments']}} comments</p>
+        <p>user has {{user_counts['questions']}} questions</p>
+    </section>
 </body>
 </html>
