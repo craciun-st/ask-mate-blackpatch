@@ -67,7 +67,8 @@ def registration_page():
 
 @app.route("/users")
 def users_page():
-    users_db = data_manager.get_all_rows_from_table('users')
+    users_db = data_manager.magic_get_users_hardcoded_labels()
+    users_db = data_manager.update_dicts_with_utctime_str(users_db)
     return render_template('users.html', users_db=users_db)
 
 @app.route("/tags")
@@ -81,8 +82,10 @@ def tags_page():
 def listing():
     if 'username' in session:
         is_logged_in = True
+        user_id = data_manager.get_user_id_from_username(session['username'])
     else:
         is_logged_in = False
+        user_id = None
     sort_by = request.args["sort-by"] if 'sort-by' in request.args.keys() else "submission_time"
     sort_order = request.args["sort-order"] if 'sort-order' in request.args.keys() else "true"
     is_descending = (sort_order.lower() in ['true', 't', 'yes'])
@@ -92,10 +95,10 @@ def listing():
         column_to_order_by=sort_by,
         reverse=is_descending
     )
-    questions = data_manager.update_dict_with_utctime_str(questions)
+    questions = data_manager.update_dicts_with_utctime_str(questions)
     
 
-    return render_template('list.html', db_questions=questions, is_logged_in = is_logged_in)
+    return render_template('list.html', db_questions=questions, is_logged_in = is_logged_in, as_user_id = user_id)
 
 
 @app.route('/question/<question_id>')
@@ -108,7 +111,7 @@ def question(question_id):
     question_comments = data_manager.get_multiple_rows_for_question_id(
         question_id, 'comment')
     question_tags =data_manager.get_tags_for_question_id(question_id)
-    question_comments = data_manager.update_dict_with_utctime_str(question_comments)
+    question_comments = data_manager.update_dicts_with_utctime_str(question_comments)
 
     for this_question_comment in question_comments:
         current_user = data_manager.get_username_from_user_id(this_question_comment['user_id'])
@@ -120,7 +123,7 @@ def question(question_id):
         for answer in answers:
             curr_comments = data_manager.get_comments_from_answer_id(
                 answer['id'])
-            curr_comments = data_manager.update_dict_with_utctime_str(curr_comments)
+            curr_comments = data_manager.update_dicts_with_utctime_str(curr_comments)
 
             for this_answer_comment in curr_comments:
                 current_user = data_manager.get_username_from_user_id(this_answer_comment['user_id'])
@@ -487,11 +490,14 @@ def user_page(user_id):
     username = data_manager.get_username_from_user_id(user_id)
     user_counts = data_manager.compose_dict_for_user_page(username)
     user_details = data_manager.get_from_table_by_id(user_id,'users')
-    return render_template('user_page.html', username= username, user_counts = user_counts, user_details= user_details)
+    return render_template('user_page.html',    username= username, 
+                                                user_counts = user_counts, 
+                                                user_details= user_details, 
+                                                id=user_id)
 
 
 if __name__ == "__main__":
-    print(data_manager.get_from_table_by_id('2','users'))
-    print(data_manager.get_username_from_user_id('2'))
-    print(data_manager.compose_dict_for_user_page('Admin'))    
+    # print(data_manager.get_from_table_by_id('2','users'))
+    # print(data_manager.get_username_from_user_id('2'))
+    # print(data_manager.compose_dict_for_user_page('Admin'))    
     app.run(debug=True)

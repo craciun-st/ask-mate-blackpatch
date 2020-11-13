@@ -410,15 +410,19 @@ def get_colpair_sorted_count_on_inner_join_group_by_table1_column_count_table2(
     return result_rows
 
 @connection_handler
-def get_count_of_users_id_from_table(cursor: RealDictCursor, table_name):
+def get_count_of_users_id_from_table(cursor: RealDictCursor, table_name, username_val):
     query=sql.SQL("""
-        select username, COUNT(users.id) from {sql_table_name} inner JOIN users
-        ON {sql_table_name}.user_id = users.id
-        GROUP BY username
+        SELECT u.username, COUNT({sql_table_name}.user_id) 
+        FROM 
+            {sql_table_name} RIGHT JOIN users AS u
+        ON {sql_table_name}.user_id = u.id
+        GROUP BY u.username
+        HAVING
+            u.username = %(current_user)s
     """).format(sql_table_name= sql.Identifier(table_name))
-    cursor.execute(query)
-    result_rows = cursor.fetchall()
-    return result_rows
+    cursor.execute(query, {'current_user': username_val})
+    result_row = cursor.fetchone()
+    return result_row
 
 
 
@@ -432,10 +436,44 @@ def delete_tag_by_question_id(cursor: RealDictCursor,id_val,table_name,tag_id_va
                 tag_id= sql.Identifier('tag_id'))
     cursor.execute(query,{'id_value':id_val,'tag_id_value':tag_id_value})
 
+@connection_handler
+def magic_get_users_hardcoded_labels(cursor):
+    query = """
+    WITH x AS (
+        WITH user_qajoin AS (
+            WITH user_qjoin AS (
+                SELECT users.id, count(question.id) as "qcount" 
+                FROM users LEFT JOIN question 
+                ON (users.id = question.user_id)        
+                GROUP BY users.id
+            ) 
+            SELECT user_qjoin.id, user_qjoin.qcount, count(answer.id) as "acount" 
+            FROM user_qjoin LEFT JOIN answer 
+            ON (user_qjoin.id = answer.user_id)    
+            GROUP BY (user_qjoin.id, user_qjoin.qcount)
+        )
+        SELECT user_qajoin.id, user_qajoin.qcount, user_qajoin.acount, count(comment.id) as "ccount" 
+        FROM user_qajoin LEFT JOIN comment 
+        ON (user_qajoin.id = comment.user_id)
+        GROUP BY
+        (user_qajoin.acount, user_qajoin.qcount, user_qajoin.id)
+    )
+    SELECT u.id, u.username, u.date_of_registration, x.qcount, x.acount, x.ccount, u.reputation 
+    FROM
+        users AS u INNER JOIN x 
+    ON
+        (u.id = x.id)
+    ORDER BY 
+        u.reputation DESC;
+    """
+    cursor.execute(query)
+    result_rows = cursor.fetchall()
+    return result_rows
 
 if __name__ == "__main__":
     # print( get_data_from_table('question') )
     # append_row_in_table({'submission_time':datetime.datetime.now(),'view_number':3,'vote_number':7},'comment')
     # update_data_question({'id':3,'title':'New line'})
-    
+    # print(magic_get_users_hardcoded_labels())
+    print(get_count_of_users_id_from_table('comment', 'average_joe'))
     pass
