@@ -11,136 +11,138 @@
 <body>
     <h1>ASK  — MATE</h1>
 
-<table id='testing_table'>
-    <tr>
-        <td id="td-width">
+<div class = "list-page-links">
+
+<!-- -------SIGNUP & LOGIN-------- -->
+    <div class="log-and-sign">
+        <p>
             {%if is_logged_in == False%}
-            <form id="login-buttons" action="/registration">
+            <form id="login-signup-buttons" action="/registration">
                 <button id="sign-log">Sign Up</button>
             </form>
             {%endif%}
-        </td>
-        <td id="td-width">
-                <form id="login-buttons" action="/users">
-        <button id="sign-log"><img src="https://cdn.discordapp.com/attachments/730458730331897949/776183888355524608/user-20.png"> Users</button>
-    </form>
-        </td>
-        
+        </p>
 
-<td id="td-width">
-    <!-- there is a drop-down for our sorting parameters -->
-    
-    <form method="GET">
-        <section class="sort-by">
-            <label for="sorting" >
-                <span title="Order">
-                    <input id="input-background" type="submit" value="⇅" >
-                </span>
-            </label>
-        <select id="sort-by" name="sort-by">
-            <option value="title">Title</option>
-            
-            <option value="submission_time">Submission Time</option>
-            
-            <option value="message">Message</option>
-            <option value="view_number">Views</option>
-            
-            <option value="vote_number">Votes</option>
-                
-        </select>
-            <select id="sort-by" name="sort-order">
-                <option value="False">Ascending</option>
-                <option value="True">Descending</option>
-
-            </select>
-        </section>
-        <!--Sort Button-->
-       <!-- <input type="submit" value="Sort" style="padding-right: 15px; margin-left: 1480px; margin-top: 10px; padding: 10px; text-align: center; font-size: 20px; border-radius: 8px; border: none; background-color: lightseagreen; color: ivory; font-family: Verdana, Geneva, Tahoma, sans-serif;"> -->
-    </form>
-</td>
-    </tr>
-        <tr>
-        <td id="td-width">
+        <p>
             {%if is_logged_in == False%}
-            <form id="login-buttons" action="/login">
+            <form id="login-signup-buttons" action="/login">
                 <button id="sign-log">Log in</button>
             </form>
             {%endif%}
-</td>
-<td id="td-width">
-    <form id="login-buttons" action="/tags">
-        <button id="sign-log"><img src="https://cdn.discordapp.com/attachments/730458730331897949/776182247308656650/18.png">  Tags</button>
-    </form>
-</td>
+        </p>
+    </div>
+<!-- --------USERS-PAGE---------- -->
+    <div class="user-and-tags">
+       
+            <form id="list-user-button" action="/users">
+                <button id="sign-log">
+                    <img src="https://cdn.discordapp.com/attachments/730458730331897949/776183888355524608/user-20.png"> 
+                    Users</button>
+            </form>
+       
+<!-- ---------TAG-PAGE----------- -->
+        
+            <form id="list-tags-button" action="/tags">
+                <button id="sign-log">
+                    <img src="https://cdn.discordapp.com/attachments/730458730331897949/776182247308656650/18.png">
+                    Tags
+                </button>
+            </form>
+       
+    </div>
+</div>
 
-   <td id="td-width">
-<!-- check this later -->
+<!-- ----------SORT-MENU--------- -->
+    <div class="sort-and-search">
+        <div class="sort-menu">
+            <form method="GET">
+                <section>
+                    <label for="sorting" >
+                        <span title="Order">
+                            <input id="input-background" type="submit" value="⇅" >
+                        </span>
+                    </label>
+                <select id="sort-by" name="sort-by">
+                    <option value="title">Title</option>
+                    
+                    <option value="submission_time">Submission Time</option>
+                    
+                    <option value="message">Message</option>
+                    <option value="view_number">Views</option>
+                    
+                    <option value="vote_number">Votes</option>
+                        
+                </select>
+                    <select id="sort-by" name="sort-order">
+                        <option value="False">Ascending</option>
+                        <option value="True">Descending</option>
 
-    <form action=/search method="GET" id='search'> 
-  
-        <button id="search-button" type="submit">
-            <span title="Search"><img src="https://cdn.discordapp.com/attachments/730458730331897949/775489377173766144/pngfind.com-search-logo-png-6694830.png"></span></button>
-        <input id="search-cell" type="text" name="q" placeholder="Search in questions">
-    </form>
+                    </select>
+                </section>
+            
+            </form>
+        </div>
 
-<!-- until here -->
-</td>
-</tr>
-
-
-    
-
+<!-- -------SEARCH - BAR---------- -->
+        <div class="search">
+            <form action=/search method="GET">         
+                <button id="search-button" type="submit">
+                    <span title="Search">
+                        <p style= text-align:center;><img src="https://cdn.discordapp.com/attachments/730458730331897949/775489377173766144/pngfind.com-search-logo-png-6694830.png">
+                        </p>
+                    </span>
+                </button>
+                <input id="search-cell" type="text" name="q" placeholder="Search in questions">
+            </form>
+        </div>
+    </div>
+<!-- </div> -->
 
 <br>
 
-    <!-- <form action="/">
-        <button id="button-back-to-main">◀  Back to Main Page</button>
-    </form>
-    
-    <br> -->
-    <!-- there is a table with every question title that we have in our database, buttons for voting up/down, views count and vote count   -->
-    <table>
-        {% for row in db_questions %}            
-        <tr>
-            <td id="td-background"><br><form action="/question/{{row['id']}}">
+<!-- ----------------QUESTION LIST--------------   -->
+<table class ="list-of-questions">
+    {% for row in db_questions %}            
+    <tr>
+        <td id="td-background">
+            <br>
+            <form action="/question/{{row['id']}}">
+                <button id="question-link-button">{{row["title"]}}</button>
+            </form>
 
-                <button id="question-link-button">{{row["title"]}}</button></form>
-
-                <p id="viewed">Viewed {{row["view_number"]}} times</p>
-                <p id="datetime">Added at {{row["utctime_str"]}}</p>
+            <p id="viewed">Viewed {{row["view_number"]}} times</p>
+            <p id="datetime">Added at {{row["utctime_str"]}}</p>
 
 
-            <td id="vote-background"> 
-                <p>
-                    <form action="/question/{{row['id']}}/vote_up">
-                        <button id="upvote-button">▲</button></form>
-                    <form action="/question/{{row['id']}}/vote_down">
-                        <button id="downvote-button">▼</button></form>
-                </p>
-                </td>
-    
-            <td id="vote-nr">{{row["vote_number"]}}</td>
-            </td>
-           
-            
-        </tr>
+        <td id="vote-background"> 
+            <p>
+                <form action="/question/{{row['id']}}/vote_up">
+                    <button id="upvote-button">▲</button>
+                </form>
 
-      <!-- table  width: 70%; border-radius: 40px; 
-       tr    style="background-color: whitesmoke; opacity: 0.6;"
-       td   border-radius: 8px;
-       td vote_nr font-size: 25px; padding-right: 20px; padding-left: 20px; -->
+                <form action="/question/{{row['id']}}/vote_down">
+                    <button id="downvote-button">▼</button>
+                </form>
+            </p>
+        </td>
 
-            
-        {% endfor %}
+        <td id="vote-nr">{{row["vote_number"]}}</td>
+        </td>
+        
+        
+    </tr>
+
+    {% endfor %}
 
 
-    </table>
+</table>
 
     <br>
     <br>
+    
     <!-- there is a button for going back to the main page '/' -->
     <form action="/">
-        <button id="button-back-to-main">◀  Back to Main Page</button>
+        <button id="button-back-to-main">↩  Back to Main Page</button>
     </form>
     <br>
     <br>

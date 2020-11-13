@@ -25,6 +25,7 @@ def get_from_table_by_id(id_val,table_name):
     return result_dict
 
 
+
 def get_comments_from_answer_id(answer_id_val):
     return connection.get_sorted_inner_join_between_tables_where_table2_column_has_value_and_order_by_table1_column(
         table1_name='comment',
@@ -138,6 +139,14 @@ def get_username_from_user_id(user_id_value):
         return username
     else:
         return "Anonymous"
+
+def get_user_id_from_username(username_value):
+    if username_value:
+        user_row = connection.get_data_by_value_pair_from_table({'username':username_value},'users')[0]
+        user_id = user_row['id']
+        return user_id
+    else:
+        return 'Anonymous'
 #--------------------------------------------------
 
 def get_tags_for_question_id(question_id_val):
@@ -236,8 +245,23 @@ def find_pattern_in_question_title_message_and_answer_message(given_pattern: str
     return id_list
 
 
+def get_count_of_questions_by_username(username):
+    usernames_and_count = connection.get_count_of_users_id_from_table('question')
+    for row in usernames_and_count:
+        if row['username'] == username:
+            return row
+
+def get_count_of_answers_by_username(username):
+    usernames_and_count = connection.get_count_of_users_id_from_table('answer')
+    for row in usernames_and_count:
+        if row['username'] == username:
+            return row
+
+def get_count_of_comments_by_username(username):
+    usernames_and_count = connection.get_count_of_users_id_from_table('comment')
+    for row in usernames_and_count:
+        if row['username'] == username:
+            return row
+
 if __name__ == "__main__":
-    db_tags = get_tagnames_sorted_by_use_count_in_questions()
-    for row in db_tags:
-        print(row['name'])
     pass

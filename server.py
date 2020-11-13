@@ -170,13 +170,18 @@ def display_new_question():
         is_logged_in = True
     else:
         is_logged_in = False
-        return render_template('not_authenticated.html'), 401
+        return render_template('login.html'), 401
     return render_template('add-question.html')
 
 
 @app.route('/add-question', methods=["POST"])
 def update_with_new_question():
-
+    if 'username' in session:
+        username = session['username']
+        user_id = data_manager.get_user_id_from_username(username)
+    else:
+       return render_template('login.html'), 401
+    
     posted_data = request.form
 
     
@@ -197,11 +202,12 @@ def update_with_new_question():
         # HTML can not find the file if we don't get rid of the '.' at the start of the path
         question_dict.update({'image': my_path_name[1:]})
     
-    #testing---------------------
-    session = {'user_id': 3}
-    question_dict.update({'user_id': session['user_id']})
-    #----------------------------
 
+    #testing---------------------
+    # session = {'user_id': 3}
+    # question_dict.update({'user_id': session['user_id']})
+    #----------------------------
+    question_dict.update({'user_id': user_id})
     data_manager.append_new_row_in_table(question_dict, 'question')
     return redirect("/question/"+str(question_dict["id"]))
 
@@ -247,10 +253,12 @@ def vote_down(question_id):
 def answer(question_id):
     global session
     if 'username' in session:
+        username = session['username']
+        user_id = data_manager.get_user_id_from_username(username)
         is_logged_in = True
     else:
         is_logged_in = False
-        return render_template('not_authenticated.html'), 401
+        return render_template('login.html'), 401
     # route for the answer page, adds an answer to a question with a specified ID when called with POST method, calling this route with GET methon will render our add-answer template
     if request.method == 'POST':
         have_to_write_image = False
@@ -265,8 +273,8 @@ def answer(question_id):
         answer_dict = data_manager.fill_missing_fields_answer(posted_data)
         answer_dict.update({'question_id': question_id})
         #for testing purposes
-        session = {'user_id' : 2}
-        answer_dict.update({'user_id': session['user_id']}) 
+        # session = {'user_id' : 2}
+        answer_dict.update({'user_id': user_id}) 
         # checking that there is a file
         if have_to_write_image:
             # my_path_name= os.path.join(my_path_name, '_'+str(answer_dict['id'])
@@ -390,14 +398,19 @@ def delete_tags(question_id,tag_id):
 
 @app.route('/question/<question_id>/new-comment', methods=['POST', 'GET'])
 def new_comment_question(question_id):
+    if 'username' in session:
+        username = session['username']
+        user_id = data_manager.get_user_id_from_username(username)
+    else:
+       return render_template('login.html'), 401
     if request.method == 'POST':
         posted_data = request.form
         comment_dict = data_manager.fill_missing_fields_from_table(
             posted_data, 'comment')
         comment_dict.update({'question_id': question_id})
         #---test-------
-        session = {'user_id' : 4}
-        comment_dict.update({'user_id': session['user_id']})
+        # session = {'user_id' : 4}
+        comment_dict.update({'user_id': user_id})
         #-----------
         data_manager.append_new_row_in_table(comment_dict, 'comment')
         return redirect('/question/' + question_id)
@@ -405,6 +418,11 @@ def new_comment_question(question_id):
 
 @app.route('/answer/<answer_id>/new-comment', methods=['POST'])
 def new_comment_answer(answer_id):
+    if 'username' in session:
+        username = session['username']
+        user_id = data_manager.get_user_id_from_username(username)
+    else:
+       return render_template('login.html'), 401
     answer = data_manager.get_from_table_by_id(answer_id, 'answer')
     question_id_as_str = str(answer['question_id'])
     if request.method == 'POST':
@@ -413,8 +431,8 @@ def new_comment_answer(answer_id):
             posted_data, 'comment')
         comment_dict.update({'answer_id': answer_id})
         #---test-------
-        session = {'user_id' : 4}
-        comment_dict.update({'user_id': session['user_id']})
+        # session = {'user_id' : 4}
+        comment_dict.update({'user_id': user_id})
         #-----------
         data_manager.append_new_row_in_table(comment_dict, 'comment')
         return redirect('/question/' + question_id_as_str)
@@ -465,5 +483,16 @@ def display_search_results():
             return render_template("search_results.html", db_questions=db_modified_questions)
 
 
-if __name__ == "__main__":    
+@app.route('/users/<user_id>')
+def user_page(user_id):
+    username = data_manager.get_username_from_user_id(user_id)
+    user_counts = data_manager.compose_dict_for_user_page(username)
+    user_details = data_manager.get_from_table_by_id(user_id,'users')
+    return render_template('user_page.html', username= username, user_counts = user_counts, user_details= user_details)
+
+
+if __name__ == "__main__":
+    # print(data_manager.get_from_table_by_id('2','users'))
+    # print(data_manager.get_username_from_user_id('2'))
+    # print(data_manager.compose_dict_for_user_page('Admin'))    
     app.run(debug=True)

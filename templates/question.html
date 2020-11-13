@@ -14,7 +14,7 @@
     <h1>ASK — MATE</h1>
     
     <form action="/list">
-        <button id="back-to-questions-button">◀ Back to questions</button>
+        <button id="back-to-questions-button">↩ Back to questions</button>
     </form>
     <br>
     <br>
@@ -44,14 +44,10 @@
 <div class="question-button-container">
     {%if is_logged_in == True%}
       <div class="answer-question-button">
-
-
-
             <form action='/question/{{input_id}}/new-answer' method="GET">
             <button id="question-buttons"><span title="Answer this Question">
               <img src="https://cdn.discordapp.com/attachments/730458730331897949/775823491571253258/PinClipart.com_speech-clip-art_802562_-_Copy_2.png"></span></button>
             </form>
-
       </div> 
     {%endif%}
 
@@ -82,7 +78,7 @@
                 </span>
             </button>
 
-            <input id="tag-cell" type="text" maxlength="50" list="tag-list" name="tagname" placeholder="Add a tag" autocomplete="off">
+            <input id="tag-cell" type="text" maxlength="20" list="tag-list" name="tagname" placeholder="Add a tag" autocomplete="off">
 
         </form>
     </div> 
@@ -173,7 +169,7 @@
         </td>
 
         <td id="answer-body">
-            <p>▶   {{row_answer["message"]}}</p>
+            <p>   {{row_answer["message"]}}</p>
             {%if row_answer['image'] %}
             <p style="text-align: center;">
                 <img src="{{row_answer['image']}}" alt="photo description" style="text-align: center; border-radius: 8px; width:98%">
@@ -236,7 +232,7 @@
     <br>
     <br>
     <form action="/list">
-        <button id="back-to-questions-button">◀ Back to questions</button>
+        <button id="back-to-questions-button">↩ Back to questions</button>
     </form>
     <br>
     <br>
