@@ -11,6 +11,12 @@
 <body>
     <h1>ASK  — MATE</h1>
 
+    {%if is_logged_in == True%}
+    <form action="/users/{{as_user_id}}">
+        <button> x</button>
+    </form>
+    {%endif%}
+
 <div class = "list-page-links">
 
 <!-- -------SIGNUP & LOGIN-------- -->
